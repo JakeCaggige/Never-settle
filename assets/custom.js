@@ -228,21 +228,23 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', () => {
   const variantButtons = document.querySelectorAll('.size-option');
   const variantInput = document.querySelector('input[name="id"]');
-  
+  const priceEl = document.getElementById('product-price');
+
+  function formatMoney(cents) {
+    return '$' + (cents / 100).toFixed(2).replace(/\.00$/, '');
+  }
+
   if (variantButtons.length && variantInput) {
     variantButtons.forEach(button => {
       button.addEventListener('click', () => {
-        // Remove active class from all buttons
         variantButtons.forEach(btn => btn.classList.remove('active'));
-        
-        // Add active class to clicked button
         button.classList.add('active');
-        
-        // Update hidden input with variant ID
+
         const variantId = button.getAttribute('data-variant-id');
-        if (variantId) {
-          variantInput.value = variantId;
-        }
+        if (variantId) variantInput.value = variantId;
+
+        const price = button.getAttribute('data-price');
+        if (price && priceEl) priceEl.textContent = formatMoney(parseInt(price, 10));
       });
     });
   }

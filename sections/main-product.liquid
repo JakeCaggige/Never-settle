@@ -52,7 +52,7 @@
 
       {% comment %} Price + Rating row {% endcomment %}
       <div class="product-price-rating">
-        <div class="product-price">{{ product.price | money }}</div>
+        <div class="product-price" id="product-price">{{ product.price | money }}</div>
         <div class="product-rating">
           <span class="stars">★★★★★</span>
           <span class="review-count">({{ product.metafields.custom.review_count | default: 127 }} reviews)</span>
@@ -68,7 +68,7 @@
             <label class="option-label">SIZE</label>
             <div class="size-options">
               {% for variant in product.variants %}
-                <button type="button" class="size-option {% if forloop.first %}active{% endif %}" data-variant-id="{{ variant.id }}">
+                <button type="button" class="size-option {% if forloop.first %}active{% endif %}" data-variant-id="{{ variant.id }}" data-price="{{ variant.price }}">
                   {{ variant.title }}{% if variant.price %} — {{ variant.price | money_without_trailing_zeros }}{% endif %}
                 </button>
               {% endfor %}

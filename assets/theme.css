@@ -192,7 +192,7 @@ img {
   font-size: 19.2px;
   letter-spacing: 5.76px;
   color: var(--color-gold);
-  text-align: center;
+  text-align: left;
 }
 
 .hero-heading {
@@ -211,7 +211,7 @@ img {
   line-height: 38.4px;
   letter-spacing: 1.2px;
   color: var(--color-white);
-  text-align: center;
+  text-align: left;
   max-width: 648px;
 }
 
@@ -392,10 +392,10 @@ img {
 }
 
 .footer-bottom p {
-  font-family: var(--font-body);
-  font-size: 14.4px;
-  letter-spacing: 1.44px;
-  color: var(--color-white-50);
+  font-family: var(--font-heading);
+  font-size: 13.3px;
+  letter-spacing: 1.33px;
+  color: var(--color-gold);
 }
 
 /* HEADER SVG ICONS */

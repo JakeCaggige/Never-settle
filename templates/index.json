@@ -73,46 +73,7 @@
     },
     "footer": {
       "type": "footer",
-      "blocks": {
-        "footer-1": {
-          "type": "link_list",
-          "settings": {
-            "heading": "COMPANY",
-            "menu": ""
-          }
-        },
-        "footer-2": {
-          "type": "link_list",
-          "settings": {
-            "heading": "SUPPORT",
-            "menu": ""
-          }
-        },
-        "footer-3": {
-          "type": "link_list",
-          "settings": {
-            "heading": "SHOP",
-            "menu": ""
-          }
-        },
-        "footer-4": {
-          "type": "link_list",
-          "settings": {
-            "heading": "CONNECT",
-            "menu": ""
-          }
-        }
-      },
-      "block_order": [
-        "footer-1",
-        "footer-2",
-        "footer-3",
-        "footer-4"
-      ],
-      "settings": {
-        "join_cta": "JOIN THE WINNERS CIRCLE",
-        "join_url": ""
-      }
+      "settings": {}
     }
   },
   "order": [

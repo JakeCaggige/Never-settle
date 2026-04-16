@@ -1,0 +1,199 @@
+<div class="product-page">
+  <div class="product-hero">
+    <div class="product-gallery">
+      <div class="product-main-image">
+        {% if product.featured_image %}
+          <img src="{{ product.featured_image | image_url: width: 800 }}" alt="{{ product.title }}" id="main-product-image">
+        {% endif %}
+      </div>
+
+      {% if product.images.size > 1 %}
+        <div class="product-thumbnails">
+          {% for image in product.images limit: 4 %}
+            <div class="thumbnail {% if forloop.first %}active{% endif %}" data-image-url="{{ image | image_url: width: 800 }}">
+              <img src="{{ image | image_url: width: 150 }}" alt="{{ product.title }}">
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="product-info">
+      <h1>{{ product.title }}</h1>
+
+      <div class="product-rating">
+        <div class="stars">★★★★★</div>
+        <span class="review-count">({{ product.metafields.custom.review_count | default: 127 }} reviews)</span>
+      </div>
+
+      <div class="product-price">
+        {{ product.price | money }}
+      </div>
+
+      <p class="product-description">{{ product.description }}</p>
+
+      <form action="/cart/add" method="post" enctype="multipart/form-data">
+        <div class="product-options">
+          {% unless product.has_only_default_variant %}
+            <label class="option-label">SIZE</label>
+            <div class="size-options">
+              {% for variant in product.variants %}
+                <button type="button" class="size-option {% if forloop.first %}active{% endif %}" data-variant-id="{{ variant.id }}">
+                  {{ variant.title }}
+                </button>
+              {% endfor %}
+            </div>
+          {% endunless %}
+        </div>
+
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+        <div class="add-to-cart-section">
+          <button type="submit" class="cta-primary" {% unless product.available %}disabled{% endunless %}>
+            {% if product.available %}ADD TO CART{% else %}SOLD OUT{% endif %}
+          </button>
+        </div>
+      </form>
+
+      <div class="shipping-info">
+        <div class="shipping-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="1" y="3" width="15" height="13" stroke="#D4AF37" stroke-width="1.5" rx="1"/>
+            <path d="M16 8h3l3 5v4h-6V8z" stroke="#D4AF37" stroke-width="1.5" stroke-linejoin="round"/>
+            <circle cx="5.5" cy="18.5" r="2.5" stroke="#D4AF37" stroke-width="1.5"/>
+            <circle cx="18.5" cy="18.5" r="2.5" stroke="#D4AF37" stroke-width="1.5"/>
+          </svg>
+          <span>Free shipping on orders $75+</span>
+        </div>
+        <div class="shipping-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M3 12a9 9 0 1018 0A9 9 0 003 12z" stroke="#D4AF37" stroke-width="1.5"/>
+            <path d="M12 8v4l3 3" stroke="#D4AF37" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <span>Made with premium ingredients</span>
+        </div>
+        <div class="shipping-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M9 12l2 2 4-4" stroke="#D4AF37" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M21 12c0 4.97-4.03 9-9 9S3 16.97 3 12 7.03 3 12 3s9 4.03 9 9z" stroke="#D4AF37" stroke-width="1.5"/>
+          </svg>
+          <span>30-day money back guarantee</span>
+        </div>
+        <div class="shipping-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" stroke="#D4AF37" stroke-width="1.5" stroke-linejoin="round"/>
+          </svg>
+          <span>More powerful than all competitors</span>
+        </div>
+      </div>
+
+      {% if product.metafields.custom.fragrance_notes %}
+        <div class="notes-section">
+          <h3>Fragrance Profile</h3>
+          {{ product.metafields.custom.fragrance_notes }}
+        </div>
+      {% endif %}
+
+      <div class="performance-section">
+        <h3 class="performance-heading">PERFORMANCE</h3>
+        <div class="performance-grid">
+          <div class="performance-item">
+            <span class="performance-label">Sillage:</span>
+            <span class="performance-value">{{ product.metafields.custom.sillage | default: 'Strong' }}</span>
+          </div>
+          <div class="performance-item">
+            <span class="performance-label">Longevity:</span>
+            <span class="performance-value">{{ product.metafields.custom.longevity | default: '8+ Hours' }}</span>
+          </div>
+          <div class="performance-item">
+            <span class="performance-label">Projection:</span>
+            <span class="performance-value">{{ product.metafields.custom.projection | default: 'Excellent' }}</span>
+          </div>
+          <div class="performance-item">
+            <span class="performance-label">Season:</span>
+            <span class="performance-value">{{ product.metafields.custom.season | default: 'All Season' }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% comment %} Customer Reviews {% endcomment %}
+  <div class="reviews-section">
+    <div class="reviews-header">
+      <div class="reviews-summary">
+        <h2 class="reviews-heading">CUSTOMER REVIEWS</h2>
+        <div class="reviews-overall">
+          <span class="stars">★★★★★</span>
+          <span class="reviews-count">Based on {{ product.metafields.custom.review_count | default: '4 reviews' }}</span>
+        </div>
+      </div>
+      <a href="#write-review" class="btn-outline">WRITE A REVIEW</a>
+    </div>
+
+    <div class="reviews-list">
+      <div class="review-card">
+        <div class="review-meta">
+          <span class="reviewer-name">MARCUS L.</span>
+          <span class="review-stars">★★★★★</span>
+          <span class="review-date">Verified Buyer</span>
+        </div>
+        <p class="review-body">This set is an absolute game changer. I can try every scent and finally pick my favourite fragrance all day.</p>
+      </div>
+      <div class="review-card">
+        <div class="review-meta">
+          <span class="reviewer-name">JAMES N.</span>
+          <span class="review-stars">★★★★★</span>
+          <span class="review-date">Verified Buyer</span>
+        </div>
+        <p class="review-body">Been wearing daily and getting more compliments on Never Settle than I have on anything else. Worth every penny.</p>
+      </div>
+      <div class="review-card">
+        <div class="review-meta">
+          <span class="reviewer-name">DEREK S.</span>
+          <span class="review-stars">★★★★★</span>
+          <span class="review-date">Verified Buyer</span>
+        </div>
+        <p class="review-body">Incredible product. Smells amazing and lasts well into the next day, exactly what I was looking for my fragrance rotation.</p>
+      </div>
+    </div>
+  </div>
+
+  {% comment %} You May Also Like {% endcomment %}
+  <div class="ymal-section">
+    <h2 class="ymal-heading">YOU MAY ALSO LIKE</h2>
+    <div class="ymal-grid">
+      {% assign rec_products = collection.products %}
+      {% for rec in rec_products limit: 3 %}
+        {% unless rec.id == product.id %}
+          <a href="{{ rec.url }}" class="ymal-card">
+            <div class="ymal-image">
+              {% if rec.featured_image %}
+                <img src="{{ rec.featured_image | image_url: width: 600 }}" alt="{{ rec.title }}" loading="lazy">
+              {% endif %}
+            </div>
+            <div class="ymal-info">
+              <h3 class="ymal-name">{{ rec.title | upcase }}</h3>
+              <div class="scent-tags">
+                {% for tag in rec.tags %}
+                  {% assign tag_lower = tag | downcase %}
+                  {% if tag_lower contains 'wood' or tag_lower contains 'leather' or tag_lower contains 'citrus' or tag_lower contains 'musk' %}
+                    <span class="scent-tag">{{ tag }}</span>
+                  {% endif %}
+                {% endfor %}
+              </div>
+              <p class="ymal-price">{{ rec.price | money }}</p>
+            </div>
+          </a>
+        {% endunless %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Discovery Set Product",
+  "settings": []
+}
+{% endschema %}

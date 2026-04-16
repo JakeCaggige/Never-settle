@@ -1,0 +1,97 @@
+<section class="scents-section">
+  <div class="section-header">
+    {% if section.settings.section_title != blank %}
+      <h2 class="section-title">{{ section.settings.section_title }}</h2>
+    {% endif %}
+    {% if section.settings.section_subtitle != blank %}
+      <p class="section-subtitle">{{ section.settings.section_subtitle }}</p>
+    {% endif %}
+  </div>
+
+  <div class="scents-grid">
+    {% if section.settings.collection != blank %}
+      {% assign collection = collections[section.settings.collection] %}
+      {% assign products_to_show = section.settings.products_to_show %}
+      
+      {% for product in collection.products limit: products_to_show %}
+        <div class="scent-card">
+          <a href="{{ product.url }}">
+            <div class="scent-image">
+              {% if product.featured_image %}
+                <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title }}" loading="lazy">
+              {% endif %}
+            </div>
+            <div class="scent-info">
+              <h3 class="scent-name">{{ product.title }}</h3>
+              <div class="scent-rating">★★★★★</div>
+              <p class="scent-price">{{ product.price | money }}</p>
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+    {% else %}
+      {% comment %} Placeholder for theme editor {% endcomment %}
+      {% for i in (1..6) %}
+        <div class="scent-card">
+          <div class="scent-image" style="background: #222; min-height: 400px;"></div>
+          <div class="scent-info">
+            <h3 class="scent-name">Product {{ i }}</h3>
+            <div class="scent-rating">★★★★★</div>
+            <p class="scent-price">$89.00</p>
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+  
+  {% if section.settings.show_view_all and section.settings.collection != blank %}
+    <div style="text-align: center; margin-top: 64px;">
+      <a href="{{ collections[section.settings.collection].url }}" class="cta-primary">VIEW ALL PRODUCTS</a>
+    </div>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Featured Collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section title",
+      "default": "THE COLLECTION"
+    },
+    {
+      "type": "text",
+      "id": "section_subtitle",
+      "label": "Section subtitle",
+      "default": "Six signature scents. Elite pheromone blends. Absolute dominance."
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection to display"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 3,
+      "max": 50,
+      "step": 1,
+      "label": "Products to show",
+      "default": 6
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show 'View All' button",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Collection"
+    }
+  ]
+}
+{% endschema %}

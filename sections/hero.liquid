@@ -1,0 +1,71 @@
+<section class="hero" style="background-image: url('{{ section.settings.hero_image | image_url }}');">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    {% if section.settings.tagline != blank %}
+      <div class="tagline">{{ section.settings.tagline }}</div>
+    {% endif %}
+    
+    {% if section.settings.heading != blank %}
+      <h1 class="hero-heading">{{ section.settings.heading }}</h1>
+    {% endif %}
+    
+    {% if section.settings.subheading != blank %}
+      <p class="hero-subtitle">{{ section.settings.subheading }}</p>
+    {% endif %}
+    
+    {% if section.settings.cta_text != blank %}
+      <a href="{{ section.settings.cta_link }}" class="cta-primary">
+        {{ section.settings.cta_text }}
+      </a>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero Section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero background image",
+      "info": "Recommended: 1920x1080px"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "#1 PHEROMONE FRAGRANCE BRAND IN AMERICA"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Main heading",
+      "default": "DOMINATE. WIN. NS."
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Legendary unique fragrances for men who refuse to be average"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Button text",
+      "default": "EXPLORE COLLECTION"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Button link",
+      "default": "/collections/all"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Section"
+    }
+  ]
+}
+{% endschema %}

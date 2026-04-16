@@ -1,0 +1,39 @@
+{% if section.settings.show_announcement %}
+  <div class="announcement-bar" style="background-color: {{ section.settings.bg_color }};">
+    <div class="announcement-text" style="color: {{ section.settings.text_color }};">
+      {{ section.settings.announcement_text }}
+    </div>
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Announcement Bar",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_announcement",
+      "label": "Show announcement bar",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "announcement_text",
+      "label": "Announcement text",
+      "default": "FREE SHIPPING ON ORDERS $75+ | 30-DAY MONEY BACK GUARANTEE"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#D4AF37"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#000000"
+    }
+  ]
+}
+{% endschema %}

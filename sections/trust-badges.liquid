@@ -1,0 +1,53 @@
+<div class="trust-badges">
+  {% for block in section.blocks %}
+    <div class="trust-badge" {{ block.shopify_attributes }}>
+      {{ block.settings.badge_text }}
+    </div>
+  {% endfor %}
+</div>
+
+{% schema %}
+{
+  "name": "Trust Badges",
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "type": "badge",
+      "name": "Trust Badge",
+      "settings": [
+        {
+          "type": "text",
+          "id": "badge_text",
+          "label": "Badge text",
+          "default": "🚚 Free Shipping $75+"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trust Badges",
+      "blocks": [
+        {
+          "type": "badge",
+          "settings": {
+            "badge_text": "🚚 Free Shipping $75+"
+          }
+        },
+        {
+          "type": "badge",
+          "settings": {
+            "badge_text": "🔄 30-Day Returns"
+          }
+        },
+        {
+          "type": "badge",
+          "settings": {
+            "badge_text": "🇺🇸 Made in USA"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,373 @@
+<div class="product-page">
+  <div class="product-hero">
+    <div class="product-gallery">
+      <div class="product-main-image">
+        {% if product.featured_image %}
+          <img src="{{ product.featured_image | image_url: width: 800 }}" alt="{{ product.title }}">
+        {% endif %}
+      </div>
+      
+      {% if product.images.size > 1 %}
+        <div class="product-thumbnails">
+          {% for image in product.images limit: 4 %}
+            <div class="thumbnail {% if forloop.first %}active{% endif %}" data-image-url="{{ image | image_url: width: 800 }}">
+              <img src="{{ image | image_url: width: 150 }}" alt="{{ product.title }}">
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="product-info">
+      <h1>{{ product.title }}</h1>
+      
+      <div class="product-rating">
+        <div class="stars">★★★★★</div>
+        <span class="review-count">({{ product.metafields.custom.review_count | default: 127 }} reviews)</span>
+      </div>
+
+      <div class="product-price">
+        {{ product.price | money }}
+      </div>
+
+      <p class="product-description">
+        {{ product.description }}
+      </p>
+
+      <form action="/cart/add" method="post" enctype="multipart/form-data">
+        <div class="product-options">
+          {% unless product.has_only_default_variant %}
+            <label class="option-label">SIZE</label>
+            <div class="size-options">
+              {% for variant in product.variants %}
+                <button type="button" class="size-option {% if forloop.first %}active{% endif %}" data-variant-id="{{ variant.id }}">
+                  {{ variant.title }}
+                </button>
+              {% endfor %}
+            </div>
+          {% endunless %}
+        </div>
+
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        
+        <div class="add-to-cart-section">
+          <button type="submit" class="cta-primary" {% unless product.available %}disabled{% endunless %}>
+            {% if product.available %}ADD TO CART{% else %}SOLD OUT{% endif %}
+          </button>
+        </div>
+      </form>
+
+      <div class="shipping-info">
+        <div class="shipping-item">
+          <span>🚚</span>
+          <span>Free shipping on orders $75+</span>
+        </div>
+        <div class="shipping-item">
+          <span>🔄</span>
+          <span>30-day money back guarantee</span>
+        </div>
+        <div class="shipping-item">
+          <span>🇺🇸</span>
+          <span>Made in USA with premium ingredients</span>
+        </div>
+      </div>
+
+      {% if product.metafields.custom.fragrance_notes %}
+        <div class="notes-section">
+          <h3>Fragrance Profile</h3>
+          {{ product.metafields.custom.fragrance_notes }}
+        </div>
+      {% endif %}
+
+      {% comment %} Performance section {% endcomment %}
+      <div class="performance-section">
+        <h3 class="performance-heading">PERFORMANCE</h3>
+        <div class="performance-grid">
+          <div class="performance-item">
+            <span class="performance-label">Sillage:</span>
+            <span class="performance-value">{{ product.metafields.custom.sillage | default: 'Strong' }}</span>
+          </div>
+          <div class="performance-item">
+            <span class="performance-label">Longevity:</span>
+            <span class="performance-value">{{ product.metafields.custom.longevity | default: '8+ Hours' }}</span>
+          </div>
+          <div class="performance-item">
+            <span class="performance-label">Projection:</span>
+            <span class="performance-value">{{ product.metafields.custom.projection | default: 'Excellent' }}</span>
+          </div>
+          <div class="performance-item">
+            <span class="performance-label">Season:</span>
+            <span class="performance-value">{{ product.metafields.custom.season | default: 'All Season' }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% comment %} Customer Reviews {% endcomment %}
+  <div class="reviews-section">
+    <div class="reviews-header">
+      <div class="reviews-summary">
+        <h2 class="reviews-heading">CUSTOMER REVIEWS</h2>
+        <div class="reviews-overall">
+          <span class="stars">★★★★★</span>
+          <span class="reviews-count">Based on {{ product.metafields.custom.review_count | default: '4 reviews' }}</span>
+        </div>
+      </div>
+      <a href="#write-review" class="btn-outline">WRITE A REVIEW</a>
+    </div>
+
+    <div class="reviews-list">
+      {% if product.metafields.custom.reviews != blank %}
+        {{ product.metafields.custom.reviews }}
+      {% else %}
+        <div class="review-card">
+          <div class="review-meta">
+            <span class="reviewer-name">MARCUS L.</span>
+            <span class="review-stars">★★★★★</span>
+            <span class="review-date">Verified Buyer</span>
+          </div>
+          <p class="review-body">This scent is an absolute game changer. Black Tiger is like no other statement scent that will get people to comment on your fragrance all day.</p>
+        </div>
+        <div class="review-card">
+          <div class="review-meta">
+            <span class="reviewer-name">JAMES N.</span>
+            <span class="review-stars">★★★★★</span>
+            <span class="review-date">Verified Buyer</span>
+          </div>
+          <p class="review-body">Been wearing daily and getting more compliments on Black Tiger than I have on anything else. Woodsy but fresh.</p>
+        </div>
+        <div class="review-card">
+          <div class="review-meta">
+            <span class="reviewer-name">DEREK S.</span>
+            <span class="review-stars">★★★★★</span>
+            <span class="review-date">Verified Buyer</span>
+          </div>
+          <p class="review-body">Incredible product. Smells amazing and lasts well into the next day, exactly what I was looking for my fragrance rotation.</p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  {% comment %} You May Also Like {% endcomment %}
+  <div class="ymal-section">
+    <h2 class="ymal-heading">YOU MAY ALSO LIKE</h2>
+    <div class="ymal-grid" id="product-recommendations">
+      {% assign rec_products = recommendations.products | default: collection.products %}
+      {% for rec in rec_products limit: 2 %}
+        {% unless rec.id == product.id %}
+          <a href="{{ rec.url }}" class="ymal-card">
+            <div class="ymal-image">
+              {% if rec.featured_image %}
+                <img src="{{ rec.featured_image | image_url: width: 600 }}" alt="{{ rec.title }}" loading="lazy">
+              {% endif %}
+            </div>
+            <div class="ymal-info">
+              <h3 class="ymal-name">{{ rec.title | upcase }}</h3>
+              <div class="scent-tags">
+                {% for tag in rec.tags %}
+                  {% assign tag_lower = tag | downcase %}
+                  {% if tag_lower contains 'wood' or tag_lower contains 'leather' or tag_lower contains 'citrus' or tag_lower contains 'musk' or tag_lower contains 'spice' %}
+                    <span class="scent-tag">{{ tag }}</span>
+                  {% endif %}
+                {% endfor %}
+              </div>
+              <p class="ymal-price">{{ rec.price | money }}</p>
+            </div>
+          </a>
+        {% endunless %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<style>
+.product-page {
+  background: var(--color-black);
+  padding: 64px;
+}
+
+.product-hero {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 96px;
+}
+
+.product-main-image {
+  width: 100%;
+  aspect-ratio: 1;
+  background: #1a1a1a;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.product-main-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-thumbnails {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.thumbnail {
+  width: 141px;
+  height: 141px;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.thumbnail.active,
+.thumbnail:hover {
+  border-color: var(--color-gold);
+}
+
+.thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-info h1 {
+  font-family: var(--font-heading);
+  font-size: 80px;
+  letter-spacing: 8px;
+  color: var(--color-white);
+  margin-bottom: 16px;
+}
+
+.product-rating {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.stars {
+  font-size: 20px;
+  color: var(--color-gold);
+}
+
+.review-count {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--color-white-70);
+}
+
+.product-price {
+  font-family: var(--font-body);
+  font-size: 32px;
+  color: var(--color-gold);
+  margin-bottom: 40px;
+}
+
+.product-description {
+  font-family: var(--font-body);
+  font-size: 20px;
+  line-height: 1.8;
+  color: var(--color-white);
+  margin-bottom: 40px;
+}
+
+.product-options {
+  margin-bottom: 32px;
+}
+
+.option-label {
+  font-family: var(--font-heading);
+  font-size: 19.2px;
+  letter-spacing: 1.92px;
+  color: var(--color-white);
+  display: block;
+  margin-bottom: 16px;
+}
+
+.size-options {
+  display: flex;
+  gap: 16px;
+}
+
+.size-option {
+  padding: 16px 32px;
+  background: transparent;
+  border: 2px solid var(--color-white-10);
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--color-white);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.size-option:hover,
+.size-option.active {
+  border-color: var(--color-gold);
+  background: var(--color-white-5);
+}
+
+.add-to-cart-section {
+  margin-bottom: 32px;
+}
+
+.shipping-info {
+  background: var(--color-white-5);
+  border: 1px solid var(--color-white-10);
+  border-radius: 4px;
+  padding: 33px;
+  margin-bottom: 32px;
+}
+
+.shipping-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--color-white);
+}
+
+.notes-section {
+  background: var(--color-white-5);
+  border: 1px solid var(--color-white-10);
+  border-radius: 4px;
+  padding: 33px;
+}
+
+.notes-section h3 {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  letter-spacing: 2.4px;
+  color: var(--color-gold);
+  margin-bottom: 20px;
+}
+
+.notes-section p {
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--color-white);
+  margin-bottom: 12px;
+}
+
+@media (max-width: 1024px) {
+  .product-hero {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Product",
+  "settings": []
+}
+{% endschema %}

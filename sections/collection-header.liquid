@@ -1,0 +1,36 @@
+<div class="collection-header">
+  <h1 class="collection-title">{{ collection.title }}</h1>
+  {% if collection.description != blank %}
+    <div class="collection-description">{{ collection.description }}</div>
+  {% endif %}
+</div>
+
+<style>
+.collection-header {
+  background: var(--color-black);
+  padding: 128px 64px 64px;
+  text-align: center;
+}
+
+.collection-title {
+  font-family: var(--font-heading);
+  font-size: 96px;
+  letter-spacing: 9.6px;
+  color: var(--color-white);
+  margin-bottom: 24px;
+}
+
+.collection-description {
+  font-family: var(--font-body);
+  font-size: 20px;
+  color: var(--color-white-80);
+  max-width: 800px;
+  margin: 0 auto;
+}
+</style>
+
+{% schema %}
+{
+  "name": "Collection Header"
+}
+{% endschema %}

@@ -1,0 +1,101 @@
+<div class="collection-products">
+  <div class="scents-grid">
+    {% for product in collection.products %}
+      <div class="scent-card">
+        <a href="{{ product.url }}">
+          <div class="scent-image">
+            {% if product.featured_image %}
+              <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title }}" loading="lazy">
+            {% endif %}
+          </div>
+          <div class="scent-info">
+            {% comment %} Badge from first matching tag: "Top Seller", "New Scent", "New Item" {% endcomment %}
+            {% assign badge = '' %}
+            {% for tag in product.tags %}
+              {% assign tag_lower = tag | downcase %}
+              {% if tag_lower == 'top seller' or tag_lower == 'new scent' or tag_lower == 'new item' %}
+                {% assign badge = tag %}
+                {% break %}
+              {% endif %}
+            {% endfor %}
+            {% if badge != '' %}
+              <span class="scent-badge">{{ badge }}</span>
+            {% endif %}
+            <h3 class="scent-name">{{ product.title }}</h3>
+            <div class="scent-tags">
+              {% for tag in product.tags %}
+                {% assign tag_lower = tag | downcase %}
+                {% if tag_lower contains 'wood' or tag_lower contains 'leather' or tag_lower contains 'citrus' or tag_lower contains 'musk' or tag_lower contains 'spice' or tag_lower contains 'floral' %}
+                  <span class="scent-tag">{{ tag }}</span>
+                {% endif %}
+              {% endfor %}
+            </div>
+            <p class="scent-price">{{ product.price | money }}</p>
+          </div>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+
+  {% if paginate.pages > 1 %}
+    <div class="pagination">
+      {% if paginate.previous %}
+        <a href="{{ paginate.previous.url }}" class="pagination-link">← Previous</a>
+      {% endif %}
+      
+      {% for part in paginate.parts %}
+        {% if part.is_link %}
+          <a href="{{ part.url }}" class="pagination-link">{{ part.title }}</a>
+        {% else %}
+          <span class="pagination-current">{{ part.title }}</span>
+        {% endif %}
+      {% endfor %}
+      
+      {% if paginate.next %}
+        <a href="{{ paginate.next.url }}" class="pagination-link">Next →</a>
+      {% endif %}
+    </div>
+  {% endif %}
+</div>
+
+<style>
+.collection-products {
+  background: var(--color-black);
+  padding: 0 64px 128px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 64px;
+}
+
+.pagination-link,
+.pagination-current {
+  padding: 12px 20px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--color-white);
+  border: 1px solid var(--color-white-10);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.pagination-link:hover {
+  border-color: var(--color-gold);
+  background: var(--color-white-5);
+}
+
+.pagination-current {
+  background: var(--color-gold);
+  color: var(--color-black);
+  border-color: var(--color-gold);
+}
+</style>
+
+{% schema %}
+{
+  "name": "Collection Products"
+}
+{% endschema %}

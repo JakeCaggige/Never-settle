@@ -1,0 +1,104 @@
+{
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "settings": {
+        "show_announcement": true,
+        "announcement_text": "FREE SHIPPING ON ORDERS $75+ | 30-DAY MONEY BACK GUARANTEE",
+        "bg_color": "#D4AF37",
+        "text_color": "#000000"
+      }
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "menu": "main-menu"
+      }
+    },
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "tagline": "#1 PHEROMONE FRAGRANCE BRAND IN AMERICA",
+        "heading": "DOMINATE. WIN. NS.",
+        "subheading": "Legendary unique fragrances for men who refuse to be average",
+        "cta_text": "EXPLORE COLLECTION",
+        "cta_link": "/collections/all"
+      }
+    },
+    "trust-badges": {
+      "type": "trust-badges",
+      "blocks": {
+        "badge-1": {
+          "type": "badge",
+          "settings": {
+            "badge_text": "🚚 Free Shipping $75+"
+          }
+        },
+        "badge-2": {
+          "type": "badge",
+          "settings": {
+            "badge_text": "🔄 30-Day Returns"
+          }
+        },
+        "badge-3": {
+          "type": "badge",
+          "settings": {
+            "badge_text": "🇺🇸 Made in USA"
+          }
+        }
+      },
+      "block_order": ["badge-1", "badge-2", "badge-3"]
+    },
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {
+        "section_title": "THE COLLECTION",
+        "section_subtitle": "Six signature scents. Elite pheromone blends. Absolute dominance.",
+        "products_to_show": 6
+      }
+    },
+    "androstenone-formula": {
+      "type": "androstenone-formula",
+      "settings": {}
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "footer-1": {
+          "type": "link_list",
+          "settings": {
+            "heading": "SHOP"
+          }
+        },
+        "footer-2": {
+          "type": "link_list",
+          "settings": {
+            "heading": "COMPANY"
+          }
+        },
+        "footer-3": {
+          "type": "link_list",
+          "settings": {
+            "heading": "SUPPORT"
+          }
+        },
+        "footer-4": {
+          "type": "link_list",
+          "settings": {
+            "heading": "CONNECT"
+          }
+        }
+      },
+      "block_order": ["footer-1", "footer-2", "footer-3", "footer-4"]
+    }
+  },
+  "order": [
+    "announcement-bar",
+    "header",
+    "hero",
+    "trust-badges",
+    "featured-collection",
+    "androstenone-formula",
+    "footer"
+  ]
+}

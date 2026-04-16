@@ -1,0 +1,153 @@
+<div class="page-content{% if page.handle == 'about' %} page-content--creed{% endif %}">
+  <div class="page-wrapper">
+    <h1 class="page-title">{{ page.title }}</h1>
+    <div class="page-body">
+      {{ page.content }}
+    </div>
+    {% if page.handle == 'about' %}
+      <div class="creed-footer">
+        <p class="creed-tagline">DOMINATE. WIN. NEVER SETTLE.</p>
+        <div class="creed-icon" aria-hidden="true">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="20" y1="0" x2="20" y2="40" stroke="#D4AF37" stroke-width="1.5"/>
+            <line x1="0" y1="20" x2="40" y2="20" stroke="#D4AF37" stroke-width="1.5"/>
+            <line x1="20" y1="7" x2="20" y2="13" stroke="#D4AF37" stroke-width="1.5"/>
+            <line x1="20" y1="27" x2="20" y2="33" stroke="#D4AF37" stroke-width="1.5"/>
+            <line x1="7" y1="20" x2="13" y2="20" stroke="#D4AF37" stroke-width="1.5"/>
+            <line x1="27" y1="20" x2="33" y2="20" stroke="#D4AF37" stroke-width="1.5"/>
+          </svg>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<style>
+.page-content {
+  background: var(--color-black);
+  padding: 128px 64px;
+  min-height: 60vh;
+}
+
+.page-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.page-title {
+  font-family: var(--font-heading);
+  font-size: 64px;
+  letter-spacing: 6.4px;
+  color: var(--color-white);
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.page-body {
+  font-family: var(--font-body);
+  font-size: 20px;
+  line-height: 1.8;
+  color: var(--color-white);
+}
+
+.page-body h2 {
+  font-family: var(--font-heading);
+  font-size: 32px;
+  letter-spacing: 3.2px;
+  color: var(--color-gold);
+  margin: 48px 0 24px;
+}
+
+.page-body h3 {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  letter-spacing: 2.4px;
+  color: var(--color-gold);
+  margin: 32px 0 16px;
+}
+
+.page-body p {
+  margin-bottom: 24px;
+  color: var(--color-white-80);
+}
+
+.page-body ul, .page-body ol {
+  margin: 24px 0;
+  padding-left: 32px;
+}
+
+.page-body li {
+  margin-bottom: 12px;
+  color: var(--color-white-80);
+}
+
+.page-body a {
+  color: var(--color-gold);
+  text-decoration: underline;
+  transition: opacity 0.3s ease;
+}
+
+.page-body a:hover {
+  opacity: 0.8;
+}
+
+/* About / Creed layout */
+.page-content--creed .page-wrapper {
+  max-width: 800px;
+  text-align: center;
+}
+
+.page-content--creed .page-body p {
+  font-size: 22px;
+  line-height: 1.9;
+  color: var(--color-white);
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.page-content--creed .page-body a {
+  color: var(--color-gold);
+}
+
+.creed-footer {
+  margin-top: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.creed-tagline {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  letter-spacing: 4px;
+  color: var(--color-white);
+  text-align: center;
+}
+
+.creed-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .page-content {
+    padding: 64px 24px;
+  }
+  
+  .page-title {
+    font-size: 40px;
+  }
+  
+  .page-body {
+    font-size: 18px;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Page"
+}
+{% endschema %}

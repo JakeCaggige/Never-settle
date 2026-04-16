@@ -1,6 +1,7 @@
 <div class="collection-products">
   <div class="scents-grid">
     {% for product in collection.products %}
+      {%- if product.handle == 'discovery-set' -%}{%- continue -%}{%- endif -%}
       {%- assign badge_label = '' -%}
       {%- for tag in product.tags -%}
         {%- assign tag_lower = tag | downcase -%}
@@ -35,7 +36,7 @@
           </div>
         </div>
 
-        <div class="quick-view-btn">QUICK VIEW</div>
+        <div class="quick-view-btn">VIEW PRODUCT</div>
       </a>
     {% endfor %}
   </div>

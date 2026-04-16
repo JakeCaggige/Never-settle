@@ -1531,7 +1531,7 @@ img {
 .contact-form-side {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 16px;
 }
 
 .contact-form-heading {
@@ -1539,14 +1539,14 @@ img {
   font-size: 48px;
   letter-spacing: 4.8px;
   color: var(--color-white);
+  margin-bottom: 4px;
 }
 
 .contact-form-sub {
   font-family: var(--font-body);
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.7;
-  color: var(--color-white-70);
-  margin-top: -16px;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .contact-row {
@@ -1563,9 +1563,9 @@ img {
 
 .contact-field label {
   font-family: var(--font-heading);
-  font-size: 13px;
-  letter-spacing: 2px;
-  color: var(--color-white-70);
+  font-size: 11px;
+  letter-spacing: 1.8px;
+  color: rgba(255, 255, 255, 0.5);
   text-transform: uppercase;
 }
 
@@ -1601,17 +1601,18 @@ img {
 }
 
 .contact-submit {
-  align-self: flex-start;
-  display: inline-block;
+  display: block;
+  width: 100%;
   padding: 18px 48px;
   background: var(--color-gold);
-  border: 2px solid var(--color-gold);
+  border: none;
   font-family: var(--font-heading);
   font-size: 16px;
   letter-spacing: 3px;
   color: var(--color-black);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: opacity 0.2s ease;
+  margin-top: 8px;
 }
 
 .contact-submit:hover {

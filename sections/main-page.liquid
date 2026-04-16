@@ -1,28 +1,108 @@
-<div class="page-content{% if page.handle == 'about' %} page-content--creed{% endif %}">
+{% if page.handle == 'about' %}
+
+<div class="creed-page">
+  <div class="creed-divider" aria-hidden="true"></div>
+  <div class="creed-inner">
+    <h2 class="creed-title">OUR CREED</h2>
+    <p class="creed-text">In an industry that caters to sheep, <span class="creed-brand">Never Settle</span> is the preferred brand of alphas.</p>
+    <p class="creed-text">Legendary unique fragrances for men who refuse to be average.</p>
+    <p class="creed-text">We believe in commanding respect, promoting the importance of physical and mental health. Unleashing your potential with elite pheromone blends crafted to your ambition.</p>
+    <p class="creed-text">We believe she'll remember you long after you leave the room.</p>
+    <p class="creed-tagline">DOMINATE. WIN. NEVER SETTLE.</p>
+    <div class="creed-icon" aria-hidden="true">
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="20" y1="0" x2="20" y2="40" stroke="#D4AF37" stroke-width="1.5"/>
+        <line x1="0" y1="20" x2="40" y2="20" stroke="#D4AF37" stroke-width="1.5"/>
+        <line x1="20" y1="7" x2="20" y2="13" stroke="#D4AF37" stroke-width="1.5"/>
+        <line x1="20" y1="27" x2="20" y2="33" stroke="#D4AF37" stroke-width="1.5"/>
+        <line x1="7" y1="20" x2="13" y2="20" stroke="#D4AF37" stroke-width="1.5"/>
+        <line x1="27" y1="20" x2="33" y2="20" stroke="#D4AF37" stroke-width="1.5"/>
+      </svg>
+    </div>
+  </div>
+</div>
+
+{% else %}
+
+<div class="page-content">
   <div class="page-wrapper">
     <h1 class="page-title">{{ page.title }}</h1>
     <div class="page-body">
       {{ page.content }}
     </div>
-    {% if page.handle == 'about' %}
-      <div class="creed-footer">
-        <p class="creed-tagline">DOMINATE. WIN. NEVER SETTLE.</p>
-        <div class="creed-icon" aria-hidden="true">
-          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <line x1="20" y1="0" x2="20" y2="40" stroke="#D4AF37" stroke-width="1.5"/>
-            <line x1="0" y1="20" x2="40" y2="20" stroke="#D4AF37" stroke-width="1.5"/>
-            <line x1="20" y1="7" x2="20" y2="13" stroke="#D4AF37" stroke-width="1.5"/>
-            <line x1="20" y1="27" x2="20" y2="33" stroke="#D4AF37" stroke-width="1.5"/>
-            <line x1="7" y1="20" x2="13" y2="20" stroke="#D4AF37" stroke-width="1.5"/>
-            <line x1="27" y1="20" x2="33" y2="20" stroke="#D4AF37" stroke-width="1.5"/>
-          </svg>
-        </div>
-      </div>
-    {% endif %}
   </div>
 </div>
 
+{% endif %}
+
 <style>
+/* ABOUT / CREED PAGE */
+.creed-page {
+  background: var(--color-black);
+  padding: 160px 134px;
+  position: relative;
+  min-height: 60vh;
+  overflow: hidden;
+}
+
+.creed-divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  pointer-events: none;
+}
+
+.creed-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  text-align: center;
+}
+
+.creed-title {
+  font-family: var(--font-heading);
+  font-size: 96px;
+  letter-spacing: 5.76px;
+  color: var(--color-white);
+  line-height: 1;
+}
+
+.creed-text {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 28.8px;
+  line-height: 51.84px;
+  color: var(--color-white);
+  text-align: center;
+  max-width: 1200px;
+}
+
+.creed-brand {
+  color: var(--color-gold);
+}
+
+.creed-tagline {
+  font-family: var(--font-heading);
+  font-size: 40px;
+  letter-spacing: 8px;
+  color: var(--color-white);
+  text-align: center;
+  margin-top: 24px;
+}
+
+.creed-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* GENERIC PAGE */
 .page-content {
   background: var(--color-black);
   padding: 128px 64px;
@@ -68,7 +148,7 @@
 
 .page-body p {
   margin-bottom: 24px;
-  color: var(--color-white-80);
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .page-body ul, .page-body ol {
@@ -78,7 +158,7 @@
 
 .page-body li {
   margin-bottom: 12px;
-  color: var(--color-white-80);
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .page-body a {
@@ -91,55 +171,26 @@
   opacity: 0.8;
 }
 
-/* About / Creed layout */
-.page-content--creed .page-wrapper {
-  max-width: 800px;
-  text-align: center;
-}
-
-.page-content--creed .page-body p {
-  font-size: 22px;
-  line-height: 1.9;
-  color: var(--color-white);
-  text-align: center;
-  margin-bottom: 32px;
-}
-
-.page-content--creed .page-body a {
-  color: var(--color-gold);
-}
-
-.creed-footer {
-  margin-top: 48px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 24px;
-}
-
-.creed-tagline {
-  font-family: var(--font-heading);
-  font-size: 28px;
-  letter-spacing: 4px;
-  color: var(--color-white);
-  text-align: center;
-}
-
-.creed-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 @media (max-width: 768px) {
+  .creed-page {
+    padding: 80px 24px;
+  }
+  .creed-title {
+    font-size: 56px;
+  }
+  .creed-text {
+    font-size: 20px;
+    line-height: 1.8;
+  }
+  .creed-tagline {
+    font-size: 28px;
+  }
   .page-content {
     padding: 64px 24px;
   }
-  
   .page-title {
     font-size: 40px;
   }
-  
   .page-body {
     font-size: 18px;
   }

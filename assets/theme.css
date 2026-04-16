@@ -561,20 +561,45 @@ img {
 
 /* ANDROSTENONE FORMULA SECTION */
 .formula-section {
-  background: var(--color-black);
-  padding: 120px 64px;
+  background: linear-gradient(to bottom, #000000, #0a0a0a);
+  padding: 120px 134px;
   border-top: 1px solid var(--color-white-10);
   border-bottom: 1px solid var(--color-white-10);
+  position: relative;
+  overflow: hidden;
+}
+
+.formula-divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  pointer-events: none;
 }
 
 .formula-inner {
-  max-width: 860px;
+  max-width: 1200px;
   margin: 0 auto;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 40px;
+}
+
+.formula-molecule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.formula-molecule img {
+  max-width: 200px;
+  height: auto;
+  opacity: 0.9;
 }
 
 .formula-icon {
@@ -585,23 +610,25 @@ img {
 
 .formula-heading {
   font-family: var(--font-heading);
-  font-size: 64px;
-  letter-spacing: 6.4px;
+  font-size: 96px;
+  letter-spacing: 5.76px;
   color: var(--color-white);
+  line-height: 1;
 }
 
 .formula-body {
   font-family: var(--font-body);
-  font-size: 20px;
-  line-height: 1.9;
-  color: var(--color-white-80);
+  font-weight: 300;
+  font-size: 28.8px;
+  line-height: 51.84px;
+  color: var(--color-white);
   text-align: center;
 }
 
 .formula-tagline {
   font-family: var(--font-heading);
-  font-size: 22px;
-  letter-spacing: 4px;
+  font-size: 40px;
+  letter-spacing: 8px;
   color: var(--color-white);
   text-align: center;
 }
@@ -622,29 +649,40 @@ img {
 
 .footer-join-save {
   position: relative;
-  background: #111;
-  border: 1px solid var(--color-white-10);
-  border-radius: 4px;
+  background: #161614;
+  border-radius: 16px;
   overflow: hidden;
-  min-width: 240px;
-  min-height: 160px;
+  min-width: 280px;
+  height: 191px;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
+}
+
+.footer-join-image-wrap {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 65%;
 }
 
 .footer-join-image {
-  position: absolute;
-  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.5;
+  object-position: top center;
+}
+
+.footer-join-image-fade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, #161614 5%, transparent 43%);
 }
 
 .footer-join-content {
   position: relative;
   z-index: 1;
-  padding: 20px 24px;
+  padding: 0 40px;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -652,8 +690,8 @@ img {
 
 .footer-join-heading {
   font-family: var(--font-heading);
-  font-size: 24px;
-  letter-spacing: 2px;
+  font-size: 40px;
+  letter-spacing: 4px;
   color: var(--color-white);
 }
 
@@ -937,28 +975,23 @@ img {
 /* DISCOVERY SET PROMO SECTION */
 .ds-promo {
   background: var(--color-black);
-  background-size: cover;
-  background-position: center;
   border-top: 1px solid var(--color-white-10);
   border-bottom: 1px solid var(--color-white-10);
-  position: relative;
-  overflow: hidden;
+  padding: 64px;
 }
 
-.ds-promo::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.6);
-  pointer-events: none;
+.ds-promo-card {
+  max-width: 1400px;
+  margin: 0 auto;
+  border-radius: 16px;
+  overflow: hidden;
+  background-image:
+    linear-gradient(221deg, rgba(0, 0, 0, 0.2) 60%, rgba(212, 175, 55, 0.2) 114%),
+    linear-gradient(90deg, #181818 0%, #181818 100%);
 }
 
 .ds-promo-inner {
-  position: relative;
-  z-index: 1;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 100px 64px;
+  padding: 80px 64px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;

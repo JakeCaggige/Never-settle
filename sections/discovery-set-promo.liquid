@@ -1,4 +1,5 @@
-<section class="ds-promo" style="{% if section.settings.bg_image != blank %}background-image: url('{{ section.settings.bg_image | image_url: width: 1600 }}');{% endif %}">
+<section class="ds-promo">
+  <div class="ds-promo-card">
   <div class="ds-promo-inner">
     <div class="ds-promo-content">
       <p class="ds-promo-tagline">{{ section.settings.tagline | default: 'TEST ALL THE SCENTS' }}</p>
@@ -14,17 +15,13 @@
       </div>
     {% endif %}
   </div>
+  </div>
 </section>
 
 {% schema %}
 {
   "name": "Discovery Set Promo",
   "settings": [
-    {
-      "type": "image_picker",
-      "id": "bg_image",
-      "label": "Background image"
-    },
     {
       "type": "image_picker",
       "id": "product_image",

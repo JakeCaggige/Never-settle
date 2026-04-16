@@ -53,9 +53,9 @@
         {% endif %}
         <div class="footer-join-content">
           <p class="footer-join-heading">JOIN &amp; SAVE</p>
-          <a href="{{ section.settings.join_url | default: '#' }}" class="btn-gold footer-join-btn">
+          <button type="button" class="btn-gold footer-join-btn" id="join-popup-trigger">
             JOIN THE WINNERS CIRCLE
-          </a>
+          </button>
         </div>
       </div>
 
@@ -66,6 +66,292 @@
     </div>
   </div>
 </footer>
+
+{% comment %} JOIN THE WINNERS CIRCLE — Email Capture Modal {% endcomment %}
+<div id="join-popup" class="join-popup" role="dialog" aria-modal="true" aria-labelledby="join-popup-title" hidden data-cross-url="{{ 'ns-cross.svg' | asset_url }}">
+  <div class="join-popup-overlay"></div>
+  <div class="join-popup-modal">
+    <button class="join-popup-close" id="join-popup-close" aria-label="Close">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="4" y1="4" x2="20" y2="20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="20" y1="4" x2="4" y2="20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+
+    <div class="join-popup-icon" aria-hidden="true">
+      <img src="{{ 'ns-cross.svg' | asset_url }}" alt="" width="40" height="40">
+    </div>
+
+    <p class="join-popup-eyebrow">EXCLUSIVE ACCESS</p>
+    <h2 class="join-popup-heading" id="join-popup-title">JOIN THE<br>WINNERS CIRCLE</h2>
+    <p class="join-popup-subtext">Get early access to new releases, members-only discounts, and elite fragrance tips.</p>
+
+    <form class="join-popup-form" id="join-popup-form">
+      <div class="join-popup-field">
+        <input
+          type="text"
+          name="first_name"
+          placeholder="FIRST NAME"
+          class="join-popup-input"
+          autocomplete="given-name"
+        >
+      </div>
+      <div class="join-popup-field">
+        <input
+          type="email"
+          name="email"
+          placeholder="EMAIL ADDRESS"
+          class="join-popup-input"
+          required
+          autocomplete="email"
+        >
+      </div>
+      <button type="submit" class="join-popup-submit">JOIN NOW — IT'S FREE</button>
+    </form>
+
+    <p class="join-popup-disclaimer">No spam. Unsubscribe anytime.</p>
+  </div>
+</div>
+
+<style>
+.join-popup {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.join-popup[hidden] {
+  display: none;
+}
+
+.join-popup-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  cursor: pointer;
+}
+
+.join-popup-modal {
+  position: relative;
+  z-index: 1;
+  background: #0d0d0d;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 4px;
+  padding: 56px 48px 48px;
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  animation: popup-in 0.3s ease;
+}
+
+@keyframes popup-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.join-popup-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  padding: 4px;
+  transition: color 0.2s ease;
+  display: flex;
+}
+
+.join-popup-close:hover {
+  color: var(--color-white);
+}
+
+.join-popup-icon {
+  margin-bottom: 24px;
+  opacity: 0.9;
+}
+
+.join-popup-eyebrow {
+  font-family: var(--font-heading);
+  font-size: 13.3px;
+  letter-spacing: 3px;
+  color: var(--color-gold);
+  margin-bottom: 12px;
+}
+
+.join-popup-heading {
+  font-family: var(--font-heading);
+  font-size: 64px;
+  letter-spacing: 6px;
+  color: var(--color-white);
+  line-height: 1;
+  margin-bottom: 20px;
+}
+
+.join-popup-subtext {
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.65);
+  max-width: 380px;
+  margin-bottom: 36px;
+}
+
+.join-popup-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.join-popup-field {
+  width: 100%;
+}
+
+.join-popup-input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--color-white);
+  font-family: var(--font-heading);
+  font-size: 14px;
+  letter-spacing: 2px;
+  padding: 18px 20px;
+  outline: none;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+.join-popup-input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.join-popup-input:focus {
+  border-color: var(--color-gold);
+}
+
+.join-popup-submit {
+  width: 100%;
+  background: var(--color-gold);
+  border: none;
+  color: var(--color-black);
+  font-family: var(--font-heading);
+  font-size: 17px;
+  letter-spacing: 2px;
+  padding: 20px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  margin-top: 4px;
+}
+
+.join-popup-submit:hover {
+  opacity: 0.9;
+}
+
+.join-popup-disclaimer {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+/* Success state */
+.join-popup-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.join-popup-success-heading {
+  font-family: var(--font-heading);
+  font-size: 48px;
+  letter-spacing: 4px;
+  color: var(--color-gold);
+}
+
+.join-popup-success-text {
+  font-family: var(--font-body);
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+@media (max-width: 480px) {
+  .join-popup-modal {
+    padding: 48px 24px 36px;
+  }
+  .join-popup-heading {
+    font-size: 48px;
+  }
+}
+</style>
+
+<script>
+(function() {
+  var trigger = document.getElementById('join-popup-trigger');
+  var popup   = document.getElementById('join-popup');
+  var overlay = popup.querySelector('.join-popup-overlay');
+  var close   = document.getElementById('join-popup-close');
+  var form    = document.getElementById('join-popup-form');
+
+  function openPopup() {
+    popup.hidden = false;
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closePopup() {
+    popup.hidden = true;
+    document.body.style.overflow = '';
+  }
+
+  trigger.addEventListener('click', openPopup);
+  close.addEventListener('click', closePopup);
+  overlay.addEventListener('click', closePopup);
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && !popup.hidden) closePopup();
+  });
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var email = form.querySelector('input[type="email"]').value;
+    var firstName = (form.querySelector('input[name="first_name"]').value || '').trim();
+
+    // Shopify newsletter subscribe via Customer API
+    fetch('/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        form_type: 'customer',
+        utf8: '✓',
+        'contact[email]': email,
+        'contact[tags]': 'newsletter',
+        'contact[first_name]': firstName
+      })
+    });
+
+    // Show success state
+    var crossUrl = popup.dataset.crossUrl;
+    var modal = popup.querySelector('.join-popup-modal');
+    modal.innerHTML = '<div class="join-popup-success">'
+      + '<img src="' + crossUrl + '" alt="" width="48" height="48">'
+      + '<p class="join-popup-success-heading">WELCOME TO THE CIRCLE</p>'
+      + '<p class="join-popup-success-text">You\'re in. Expect something legendary.</p>'
+      + '</div>';
+
+    setTimeout(closePopup, 3000);
+  });
+})();
+</script>
 
 {% schema %}
 {

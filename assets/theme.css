@@ -1797,7 +1797,7 @@ img {
   .hero {
     padding: 48px 24px;
     min-height: 560px;
-    background-position: center center;
+    background-position: right center;
   }
 
   .hero-heading {

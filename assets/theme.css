@@ -1535,7 +1535,7 @@ img {
 .contact-form-side {
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 40px;
 }
 
 .contact-form-heading {

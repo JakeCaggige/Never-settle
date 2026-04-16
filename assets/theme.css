@@ -1172,7 +1172,7 @@ img {
 
 /* Add to cart */
 .add-to-cart-section {
-  padding: 0;
+  margin-top: 16px;
 }
 
 .btn-add-to-cart {

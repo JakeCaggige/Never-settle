@@ -12,6 +12,8 @@
 
         {% comment %} LEFT — Items {% endcomment %}
         <div class="cart-items-col">
+
+          {% comment %} Header row — display:contents makes its children direct grid children {% endcomment %}
           <div class="cart-items-header">
             <div class="col-label col-product">PRODUCT</div>
             <div class="col-label col-price">PRICE</div>
@@ -19,6 +21,7 @@
             <div class="col-label col-total">TOTAL</div>
             <div class="col-label col-remove"></div>
           </div>
+          <div class="cart-header-divider"></div>
 
           {% for item in cart.items %}
             <div class="cart-item" data-item-key="{{ item.key }}">
@@ -50,6 +53,7 @@
 
               <button class="remove-btn col-remove" data-key="{{ item.key }}" aria-label="Remove item">×</button>
             </div>
+            <div class="cart-row-divider"></div>
           {% endfor %}
         </div>
 
@@ -126,18 +130,43 @@
   align-items: start;
 }
 
-/* Items column — shared column template */
-.cart-items-header,
-.cart-item {
+/* Single grid container — all header and item cells are direct children */
+.cart-items-col {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr 32px;
   align-items: center;
 }
 
-.cart-items-header {
+/* Row wrappers become transparent to layout */
+.cart-items-header,
+.cart-item {
+  display: contents;
+}
+
+/* Header cell padding */
+.cart-items-header > * {
   padding-bottom: 16px;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Full-width header separator */
+.cart-header-divider {
+  grid-column: 1 / -1;
+  height: 1px;
+  background: rgba(255,255,255,0.1);
   margin-bottom: 8px;
+}
+
+/* Full-width row separator */
+.cart-row-divider {
+  grid-column: 1 / -1;
+  height: 1px;
+  background: rgba(255,255,255,0.06);
+}
+
+/* Item cell padding */
+.cart-item > * {
+  padding-top: 24px;
+  padding-bottom: 24px;
 }
 
 .col-label {
@@ -150,12 +179,6 @@
 
 .col-price, .col-qty, .col-total { text-align: center; }
 .col-remove { text-align: right; }
-
-/* Cart item row */
-.cart-item {
-  padding: 24px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-}
 
 .item-info {
   display: flex;
@@ -371,12 +394,19 @@
 
 @media (max-width: 768px) {
   .cart-page { padding: 48px 24px; }
+  .cart-items-col { display: block; }
   .cart-items-header { display: none; }
+  .cart-header-divider { display: none; }
   .cart-item {
-    grid-template-columns: 1fr;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 12px;
     padding: 24px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
   }
+  .cart-item > * { padding: 0; }
+  .cart-row-divider { display: none; }
+  .item-info { grid-column: 1 / -1; }
   .item-price, .item-total { text-align: left; }
   .qty-wrapper { margin: 0; }
   .remove-btn { justify-content: flex-start; }
@@ -397,7 +427,7 @@
     const btn = e.target.closest('.qty-btn');
     if (btn) {
       const key = btn.dataset.key;
-      const row = btn.closest('.cart-item');
+      const row = btn.closest('[data-item-key]');
       const current = parseInt(row.querySelector('.qty-value').textContent, 10);
       const next = btn.dataset.action === 'increase' ? current + 1 : current - 1;
       if (next < 1) {

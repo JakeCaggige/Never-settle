@@ -725,6 +725,10 @@ img {
   opacity: 0.9;
 }
 
+.footer-join-btn {
+  padding: 14px 36px;
+}
+
 /* PRODUCT PAGE — PERFORMANCE SECTION */
 .performance-section {
   background: var(--color-white-5);
@@ -1531,7 +1535,7 @@ img {
 .contact-form-side {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 28px;
 }
 
 .contact-form-heading {

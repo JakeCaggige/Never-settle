@@ -1827,7 +1827,7 @@ img {
   .section-subtitle { font-size: 16px; }
 
   .scents-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
   }
 
   .scent-name {
@@ -1879,7 +1879,7 @@ img {
   }
 
   .ds-promo-content {
-    padding: 48px 24px 40px;
+    padding: 32px 24px 28px;
   }
 
   .ds-promo-image {
@@ -1901,9 +1901,11 @@ img {
   }
 
   /* Footer */
+  .site-footer { padding: 40px 24px 32px; }
+
   .footer-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 32px;
+    gap: 24px;
   }
 
   .footer-join-save {
@@ -2006,8 +2008,6 @@ img {
   .section-header { gap: 12px; }
   .section-title { font-size: 40px; }
   .section-subtitle { font-size: 15px; }
-
-  .scents-grid { grid-template-columns: repeat(2, 1fr); }
 
   /* Formula */
   .formula-heading { font-size: 36px; }

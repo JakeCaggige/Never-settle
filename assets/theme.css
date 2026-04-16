@@ -1034,6 +1034,8 @@ img {
   letter-spacing: 9.6px;
   color: var(--color-white);
   line-height: 1;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .ds-promo-subtitle {
@@ -1773,8 +1775,22 @@ img {
   .header-nav {
     order: 3;
     width: 100%;
-    justify-content: center;
-    gap: 24px;
+    justify-content: flex-start;
+    gap: 20px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .header-nav::-webkit-scrollbar { display: none; }
+
+  .nav-link {
+    white-space: nowrap;
+    flex-shrink: 0;
+    font-size: 13px;
+    letter-spacing: 1.2px;
   }
 
   /* Hero */

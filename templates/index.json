@@ -64,6 +64,7 @@
     "discovery-set-promo": {
       "type": "discovery-set-promo",
       "settings": {
+        "product_image": "shopify://shop_images/discovery-product-main-image.png",
         "tagline": "TEST ALL THE SCENTS",
         "heading": "DISCOVERY SET",
         "subtitle": "Legendary unique fragrances for men who refuse to be average",
@@ -73,7 +74,12 @@
     },
     "footer": {
       "type": "footer",
-      "settings": {}
+      "settings": {
+        "instagram_url": "",
+        "tiktok_url": "",
+        "youtube_url": "",
+        "join_url": ""
+      }
     }
   },
   "order": [

@@ -1,9 +1,35 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "announcement-bar": { "type": "announcement-bar" },
-    "header": { "type": "header" },
-    "main": { "type": "main-page" },
-    "footer": { "type": "footer" }
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "settings": {}
+    },
+    "header": {
+      "type": "header",
+      "settings": {}
+    },
+    "main": {
+      "type": "main-page",
+      "settings": {}
+    },
+    "footer": {
+      "type": "footer",
+      "settings": {}
+    }
   },
-  "order": ["announcement-bar", "header", "main", "footer"]
+  "order": [
+    "announcement-bar",
+    "header",
+    "main",
+    "footer"
+  ]
 }

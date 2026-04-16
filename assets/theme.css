@@ -378,11 +378,11 @@ img {
 .scent-pill {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 8px;
   background: rgba(0, 0, 0, 0.3);
   border: 0.5px solid #353535;
   border-radius: 25px;
-  padding: 5px 10px 5px 5px;
+  padding: 5px 14px 5px 5px;
   font-family: var(--font-heading);
   font-size: 18px;
   color: rgba(255, 255, 255, 0.6);

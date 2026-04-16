@@ -382,7 +382,7 @@ img {
   background: rgba(0, 0, 0, 0.3);
   border: 0.5px solid #353535;
   border-radius: 25px;
-  padding: 6px 14px 4px 5px;
+  padding: 6px 14px 4px 8px;
   font-family: var(--font-heading);
   font-size: 18px;
   color: rgba(255, 255, 255, 0.6);

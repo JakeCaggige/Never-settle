@@ -11,11 +11,19 @@
   "sections": {
     "announcement-bar": {
       "type": "announcement-bar",
-      "settings": {}
+      "settings": {
+        "show_announcement": true,
+        "announcement_text": "FREE SHIPPING ON ORDERS $75+ | 30-DAY MONEY BACK GUARANTEE",
+        "bg_color": "#d4af37",
+        "text_color": "#000000"
+      }
     },
     "header": {
       "type": "header",
-      "settings": {}
+      "settings": {
+        "logo": "shopify://shop_images/Nav_Logo.svg",
+        "menu": "main-menu"
+      }
     },
     "main": {
       "type": "main-contact",
@@ -23,7 +31,12 @@
     },
     "footer": {
       "type": "footer",
-      "settings": {}
+      "settings": {
+        "instagram_url": "",
+        "tiktok_url": "",
+        "youtube_url": "",
+        "join_url": ""
+      }
     }
   },
   "order": [

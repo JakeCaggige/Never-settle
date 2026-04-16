@@ -1,29 +1,33 @@
 <div class="product-page">
   <div class="product-hero">
+
+    {% comment %} LEFT — Sticky gallery {% endcomment %}
     <div class="product-gallery">
       <div class="product-main-image">
         {% if product.featured_image %}
-          <img src="{{ product.featured_image | image_url: width: 800 }}" alt="{{ product.title }}" id="main-product-image">
+          <img src="{{ product.featured_image | image_url: width: 900 }}" alt="{{ product.title }}" id="main-product-image">
         {% endif %}
       </div>
       {% if product.images.size > 1 %}
         <div class="product-thumbnails">
           {% for image in product.images limit: 4 %}
-            <div class="thumbnail {% if forloop.first %}active{% endif %}" data-image-url="{{ image | image_url: width: 800 }}">
-              <img src="{{ image | image_url: width: 150 }}" alt="{{ product.title }}">
+            <div class="thumbnail {% if forloop.first %}active{% endif %}" data-image-url="{{ image | image_url: width: 900 }}">
+              <img src="{{ image | image_url: width: 160 }}" alt="{{ product.title }}">
             </div>
           {% endfor %}
         </div>
       {% endif %}
     </div>
 
+    {% comment %} RIGHT — Product info {% endcomment %}
     <div class="product-info">
-      <h1>{{ product.title | upcase }}</h1>
 
-      {% comment %} Fragrance note pills — use blocks if set, otherwise fall back to product tags {% endcomment %}
+      <h1 class="product-title">{{ product.title | upcase }}</h1>
+
+      {% comment %} Fragrance note pills — blocks override tags {% endcomment %}
       {%- assign note_blocks = section.blocks | where: 'type', 'fragrance_note' -%}
-      {% if note_blocks.size > 0 %}
-        <div class="scent-pill-row product-scent-pills">
+      <div class="scent-pill-row product-scent-pills">
+        {% if note_blocks.size > 0 %}
           {% for block in note_blocks %}
             <span class="scent-pill scent-pill--custom" {{ block.shopify_attributes }}>
               <span class="scent-pill-dot"
@@ -34,22 +38,19 @@
               {{ block.settings.label | upcase }}
             </span>
           {% endfor %}
-        </div>
-      {% else %}
-        <div class="scent-pill-row product-scent-pills">
+        {% else %}
           {%- for tag in product.tags -%}
             {%- assign tl = tag | downcase -%}
             {%- if tl == 'wood' or tl == 'leather' or tl == 'citrus' or tl == 'musk' or tl == 'spice' or tl == 'floral' -%}
               <span class="scent-pill scent-pill--{{ tl }}">
-                <span class="scent-pill-dot"></span>
-                {{ tag | upcase }}
+                <span class="scent-pill-dot"></span>{{ tag | upcase }}
               </span>
             {%- endif -%}
           {%- endfor -%}
-        </div>
-      {% endif %}
+        {% endif %}
+      </div>
 
-      {% comment %} Price + Rating on same row {% endcomment %}
+      {% comment %} Price + Rating row {% endcomment %}
       <div class="product-price-rating">
         <div class="product-price">{{ product.price | money }}</div>
         <div class="product-rating">
@@ -60,6 +61,7 @@
 
       <p class="product-description">{{ product.description }}</p>
 
+      {% comment %} Size + Add to Cart {% endcomment %}
       <form action="/cart/add" method="post" enctype="multipart/form-data">
         {% unless product.has_only_default_variant %}
           <div class="product-options">
@@ -67,100 +69,105 @@
             <div class="size-options">
               {% for variant in product.variants %}
                 <button type="button" class="size-option {% if forloop.first %}active{% endif %}" data-variant-id="{{ variant.id }}">
-                  {{ variant.title }}
+                  {{ variant.title }}{% if variant.price %} — {{ variant.price | money_without_trailing_zeros }}{% endif %}
                 </button>
               {% endfor %}
             </div>
           </div>
         {% endunless %}
 
-        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" id="product-variant-id">
 
         <div class="add-to-cart-section">
-          <button type="submit" class="cta-primary" {% unless product.available %}disabled{% endunless %}>
+          <button type="submit" class="btn-add-to-cart" {% unless product.available %}disabled{% endunless %}>
             {% if product.available %}ADD TO CART{% else %}SOLD OUT{% endif %}
           </button>
         </div>
       </form>
 
-      {% comment %} 2-column shipping row {% endcomment %}
+      {% comment %} Shipping / trust row {% endcomment %}
       <div class="shipping-info">
         <div class="shipping-item">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <rect x="1" y="3" width="15" height="13" stroke="#D4AF37" stroke-width="1.5" rx="1"/>
-            <path d="M16 8h3l3 5v4h-6V8z" stroke="#D4AF37" stroke-width="1.5" stroke-linejoin="round"/>
-            <circle cx="5.5" cy="18.5" r="2.5" stroke="#D4AF37" stroke-width="1.5"/>
-            <circle cx="18.5" cy="18.5" r="2.5" stroke="#D4AF37" stroke-width="1.5"/>
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="1" y="3" width="15" height="13" stroke="currentColor" stroke-width="1.5" rx="1"/>
+            <path d="M16 8h3l3 5v4h-6V8z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+            <circle cx="5.5" cy="18.5" r="2.5" stroke="currentColor" stroke-width="1.5"/>
+            <circle cx="18.5" cy="18.5" r="2.5" stroke="currentColor" stroke-width="1.5"/>
           </svg>
-          <span>Free shipping on orders $75+</span>
+          <span>FREE SHIPPING ON ORDERS $75+</span>
         </div>
         <div class="shipping-item">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" stroke="#D4AF37" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <line x1="4" y1="22" x2="4" y2="15" stroke="#D4AF37" stroke-width="1.5" stroke-linecap="round"/>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M5 3v18M5 3h14l-3 5 3 5H5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          <span>Made in USA with premium ingredients</span>
+          <span>MADE IN USA WITH PREMIUM INGREDIENTS</span>
         </div>
       </div>
 
-      {% comment %} 2x2 core features grid {% endcomment %}
+      {% comment %} Core features — 4 individual bordered cards in 2×2 {% endcomment %}
       <div class="core-features">
         <div class="core-feature">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" stroke="#D4AF37" stroke-width="1.5"/>
-            <path d="M8 12l3 3 5-5" stroke="#D4AF37" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <svg width="19" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M12 2C8 2 4 5 4 10c0 4 3 7 6 9l2 1 2-1c3-2 6-5 6-9 0-5-4-8-8-8z" stroke="currentColor" stroke-width="1.5"/>
+            <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.5"/>
           </svg>
-          <span>Essential Grade Pheromones</span>
+          <span>ESSENTIAL GRADE PHEROMONES</span>
         </div>
         <div class="core-feature">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <circle cx="12" cy="12" r="10" stroke="#D4AF37" stroke-width="1.5"/>
-            <path d="M12 6v6l4 2" stroke="#D4AF37" stroke-width="1.5" stroke-linecap="round"/>
+          <svg width="20" height="21" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          <span>Long Lasting</span>
+          <span>LONG LASTING</span>
         </div>
         <div class="core-feature">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M12 2l2 7h7l-5.5 4 2 7L12 16l-5.5 4 2-7L3 9h7z" stroke="#D4AF37" stroke-width="1.5" stroke-linejoin="round"/>
+          <svg width="17" height="21" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M12 2l2 7h7l-5.5 4 2 7L12 16l-5.5 4 2-7L3 9h7z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
           </svg>
-          <span>Dominant Scent Profiles</span>
+          <span>DOMINANT SCENT PROFILES</span>
         </div>
         <div class="core-feature">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="#D4AF37" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          <span>More Powerful Than All Competitors</span>
+          <span>MORE POWERFUL THAN ALL COMPETITORS</span>
         </div>
       </div>
 
-      {% if product.metafields.custom.fragrance_notes %}
-        <div class="notes-section">
-          <h3>Fragrance Profile</h3>
-          {{ product.metafields.custom.fragrance_notes }}
-        </div>
-      {% endif %}
-
-      <div class="performance-section">
-        <h3 class="performance-heading">PERFORMANCE</h3>
-        <div class="performance-grid">
-          <div class="performance-item">
-            <span class="performance-label">Intensity:</span>
-            <span class="performance-value">{{ product.metafields.custom.intensity | default: 'Bold' }}</span>
-          </div>
-          <div class="performance-item">
-            <span class="performance-label">Longevity:</span>
-            <span class="performance-value">{{ product.metafields.custom.longevity | default: '8-10 hours' }}</span>
-          </div>
-          <div class="performance-item">
-            <span class="performance-label">Projection:</span>
-            <span class="performance-value">{{ product.metafields.custom.projection | default: 'Moderate-Strong' }}</span>
-          </div>
-          <div class="performance-item">
-            <span class="performance-label">Season:</span>
-            <span class="performance-value">{{ product.metafields.custom.season | default: 'Fall/Winter' }}</span>
-          </div>
+      {% comment %} Fragrance Profile {% endcomment %}
+      <div class="product-detail-box">
+        <h3 class="detail-box-heading">FRAGRANCE PROFILE</h3>
+        <div class="detail-box-rows">
+          <p class="detail-row">
+            <strong>Top Notes:</strong> {{ product.metafields.custom.top_notes | default: 'Bergamot, Black Pepper, Cardamom' }}
+          </p>
+          <p class="detail-row">
+            <strong>Heart Notes:</strong> {{ product.metafields.custom.heart_notes | default: 'Leather, Tobacco, Vetiver' }}
+          </p>
+          <p class="detail-row">
+            <strong>Base Notes:</strong> {{ product.metafields.custom.base_notes | default: 'Oud, Amber, Musk' }}
+          </p>
         </div>
       </div>
+
+      {% comment %} Performance {% endcomment %}
+      <div class="product-detail-box">
+        <h3 class="detail-box-heading">PERFORMANCE</h3>
+        <div class="detail-box-rows">
+          <p class="detail-row">
+            <strong>Intensity:</strong> {{ product.metafields.custom.intensity | default: 'Bold' }}
+          </p>
+          <p class="detail-row">
+            <strong>Longevity:</strong> {{ product.metafields.custom.longevity | default: '8-10 hours' }}
+          </p>
+          <p class="detail-row">
+            <strong>Projection:</strong> {{ product.metafields.custom.projection | default: 'Moderate-Strong' }}
+          </p>
+          <p class="detail-row">
+            <strong>Season:</strong> {{ product.metafields.custom.season | default: 'Fall/Winter' }}
+          </p>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -195,7 +202,7 @@
           </div>
           <span class="review-date">Verified Purchase</span>
         </div>
-        <p class="review-body">"Been wearing designer fragrances for years. Black Tiger blows them all out of the water. Worth every penny."</p>
+        <p class="review-body">"Been wearing designer fragrances for years. This blows them all out of the water. Worth every penny."</p>
       </div>
       <div class="review-card">
         <div class="review-meta">
@@ -232,8 +239,7 @@
                     {%- assign tl = tag | downcase -%}
                     {%- if tl == 'wood' or tl == 'leather' or tl == 'citrus' or tl == 'musk' or tl == 'spice' or tl == 'floral' -%}
                       <span class="scent-pill scent-pill--{{ tl }}">
-                        <span class="scent-pill-dot"></span>
-                        {{ tag | upcase }}
+                        <span class="scent-pill-dot"></span>{{ tag | upcase }}
                       </span>
                     {%- endif -%}
                   {%- endfor -%}
@@ -262,14 +268,13 @@
           "type": "image_picker",
           "id": "dot_image",
           "label": "Dot icon image",
-          "info": "Upload a 40×40px image (e.g. wood grain, leather texture, citrus slice). Displays as the note pill dot."
+          "info": "Upload a 40×40px texture image for the pill dot (wood grain, leather, citrus slice, etc.)"
         },
         {
           "type": "text",
           "id": "label",
           "label": "Note name",
-          "default": "WOOD",
-          "info": "Displayed next to the dot (e.g. WOOD, LEATHER, CITRUS)"
+          "default": "WOOD"
         }
       ]
     }

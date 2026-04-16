@@ -1015,7 +1015,10 @@ img {
   align-items: start;
 }
 
+/* Sticky gallery */
 .product-gallery {
+  position: sticky;
+  top: 92px; /* header height + offset */
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -1060,209 +1063,238 @@ img {
   border-color: var(--color-gold);
 }
 
+/* Product info column */
 .product-info {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 28px;
 }
 
-.product-info h1 {
+.product-title {
   font-family: var(--font-heading);
-  font-size: 64px;
-  letter-spacing: 6.4px;
+  font-size: 80px;
+  letter-spacing: 8px;
   color: var(--color-white);
   line-height: 1;
 }
 
-/* Product scent tags with dot */
-.product-scent-tags {
-  justify-content: flex-start;
+/* Scent pills on product page — white text (not 60% opacity) */
+.product-scent-pills {
   margin: 0;
 }
 
-.scent-tag-dot {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--font-body);
-  font-size: 13px;
-  color: var(--color-white-70);
-}
-
-.scent-tag-dot .dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--color-gold);
-  flex-shrink: 0;
+.product-scent-pills .scent-pill {
+  color: var(--color-white);
 }
 
 /* Price + Rating row */
 .product-price-rating {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 12px;
   flex-wrap: wrap;
 }
 
 .product-price {
-  font-family: var(--font-heading);
+  font-family: var(--font-body);
   font-size: 32px;
-  letter-spacing: 3.2px;
   color: var(--color-gold);
 }
 
 .product-rating {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 16px;
 }
 
 .product-rating .stars {
   color: var(--color-gold);
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .product-rating .review-count {
   font-family: var(--font-body);
-  font-size: 15px;
-  color: var(--color-white-70);
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .product-description {
   font-family: var(--font-body);
-  font-size: 18px;
-  line-height: 1.8;
-  color: var(--color-white-80);
+  font-size: 19.2px;
+  line-height: 34.56px;
+  color: rgba(255, 255, 255, 0.8);
+  padding-top: 16px;
 }
 
 /* Size options */
 .product-options {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
+  padding-top: 32px;
 }
 
 .option-label {
   font-family: var(--font-heading);
-  font-size: 14px;
-  letter-spacing: 3px;
-  color: var(--color-white-70);
+  font-size: 19.2px;
+  color: var(--color-white);
 }
 
 .size-options {
   display: flex;
-  gap: 12px;
+  gap: 16px;
   flex-wrap: wrap;
 }
 
 .size-option {
-  padding: 10px 24px;
-  border: 1px solid var(--color-white-10);
-  background: transparent;
+  padding: 18px 34px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
   font-family: var(--font-heading);
-  font-size: 14px;
-  letter-spacing: 1.5px;
+  font-size: 13.3px;
+  letter-spacing: 1.33px;
   color: var(--color-white);
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
-.size-option:hover,
 .size-option.active {
+  background: rgba(212, 175, 55, 0.1);
   border-color: var(--color-gold);
-  color: var(--color-gold);
 }
 
+.size-option:hover:not(.active) {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Add to cart */
 .add-to-cart-section {
-  margin-top: 8px;
+  padding: 16px 0;
 }
 
-.add-to-cart-section .cta-primary {
+.btn-add-to-cart {
+  display: block;
   width: 100%;
+  padding: 24px;
+  background: var(--color-gold);
+  border: none;
+  font-family: var(--font-heading);
+  font-size: 19.2px;
+  letter-spacing: 1.92px;
+  color: var(--color-black);
   text-align: center;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
 }
 
-/* Shipping info row */
+.btn-add-to-cart:hover {
+  opacity: 0.9;
+}
+
+.btn-add-to-cart:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Shipping info row — bordered box */
 .shipping-info {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
-  padding: 20px 0;
-  border-top: 1px solid var(--color-white-10);
-  border-bottom: 1px solid var(--color-white-10);
+  padding: 25px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
 }
 
 .shipping-item {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-family: var(--font-body);
-  font-size: 14px;
-  color: var(--color-white-70);
+  gap: 16px;
+  color: var(--color-white);
 }
 
 .shipping-item svg {
   flex-shrink: 0;
+  color: var(--color-white);
 }
 
-/* Core features 2x2 grid */
+.shipping-item span {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  letter-spacing: 1.44px;
+  text-transform: uppercase;
+  line-height: 20.4px;
+}
+
+/* Core features — 4 individual bordered cards in 2×2 grid */
 .core-features {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  gap: 28px;
 }
 
 .core-feature {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-family: var(--font-body);
-  font-size: 14px;
-  color: var(--color-white-80);
+  gap: 16px;
+  padding: 25px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
 }
 
 .core-feature svg {
   flex-shrink: 0;
-}
-
-/* Fragrance profile section */
-.fragrance-profile {
-  background: var(--color-white-5);
-  border: 1px solid var(--color-white-10);
-  border-radius: 4px;
-  padding: 24px 32px;
-}
-
-.fragrance-profile h3 {
-  font-family: var(--font-heading);
-  font-size: 16px;
-  letter-spacing: 3px;
-  color: var(--color-gold);
-  margin-bottom: 16px;
-}
-
-.fragrance-notes {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.fragrance-note {
-  display: flex;
-  gap: 8px;
-  font-family: var(--font-body);
-  font-size: 15px;
-}
-
-.fragrance-note-label {
-  color: var(--color-white-70);
-  min-width: 80px;
-}
-
-.fragrance-note-value {
   color: var(--color-white);
 }
+
+.core-feature span {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  letter-spacing: 1.44px;
+  color: var(--color-white);
+  text-transform: uppercase;
+  line-height: 20.4px;
+}
+
+/* Fragrance Profile + Performance boxes */
+.product-detail-box {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 32px;
+}
+
+.detail-box-heading {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  letter-spacing: 2.4px;
+  color: var(--color-gold);
+  margin-bottom: 28px;
+}
+
+.detail-box-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.detail-row {
+  font-family: var(--font-body);
+  font-size: 17.6px;
+  line-height: 28.16px;
+  color: var(--color-white);
+}
+
+.detail-row strong {
+  font-weight: 700;
+}
+
+/* Legacy — kept for compat */
+.product-scent-tags { justify-content: flex-start; margin: 0; }
+.scent-tag-dot { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-body); font-size: 13px; color: var(--color-white-70); }
+.scent-tag-dot .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--color-gold); flex-shrink: 0; }
 
 /* FAQ PAGE */
 .faq-page {

@@ -20,17 +20,34 @@
     <div class="product-info">
       <h1>{{ product.title | upcase }}</h1>
 
-      {% comment %} Scent tags below title {% endcomment %}
-      <div class="scent-tags product-scent-tags">
-        {% for tag in product.tags %}
-          {% assign tag_lower = tag | downcase %}
-          {% if tag_lower contains 'wood' or tag_lower contains 'leather' or tag_lower contains 'citrus' or tag_lower contains 'musk' or tag_lower contains 'spice' or tag_lower contains 'floral' %}
-            <span class="scent-tag-dot">
-              <span class="dot"></span>{{ tag }}
+      {% comment %} Fragrance note pills — use blocks if set, otherwise fall back to product tags {% endcomment %}
+      {%- assign note_blocks = section.blocks | where: 'type', 'fragrance_note' -%}
+      {% if note_blocks.size > 0 %}
+        <div class="scent-pill-row product-scent-pills">
+          {% for block in note_blocks %}
+            <span class="scent-pill scent-pill--custom" {{ block.shopify_attributes }}>
+              <span class="scent-pill-dot"
+                {% if block.settings.dot_image != blank %}
+                  style="background-image: url('{{ block.settings.dot_image | image_url: width: 40 }}'); background-size: cover; background-position: center;"
+                {% endif %}
+              ></span>
+              {{ block.settings.label | upcase }}
             </span>
-          {% endif %}
-        {% endfor %}
-      </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="scent-pill-row product-scent-pills">
+          {%- for tag in product.tags -%}
+            {%- assign tl = tag | downcase -%}
+            {%- if tl == 'wood' or tl == 'leather' or tl == 'citrus' or tl == 'musk' or tl == 'spice' or tl == 'floral' -%}
+              <span class="scent-pill scent-pill--{{ tl }}">
+                <span class="scent-pill-dot"></span>
+                {{ tag | upcase }}
+              </span>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {% endif %}
 
       {% comment %} Price + Rating on same row {% endcomment %}
       <div class="product-price-rating">
@@ -196,29 +213,36 @@
   {% comment %} You May Also Like {% endcomment %}
   <div class="ymal-section">
     <h2 class="ymal-heading">YOU MAY ALSO LIKE</h2>
-    <div class="ymal-grid">
-      {% assign rec_products = collection.products %}
-      {% for rec in rec_products limit: 3 %}
+    <div class="ymal-scents-grid">
+      {% assign ymal_count = 0 %}
+      {% for rec in collection.products %}
         {% unless rec.id == product.id %}
-          <a href="{{ rec.url }}" class="ymal-card">
-            <div class="ymal-image">
-              {% if rec.featured_image %}
-                <img src="{{ rec.featured_image | image_url: width: 600 }}" alt="{{ rec.title }}" loading="lazy">
-              {% endif %}
-            </div>
-            <div class="ymal-info">
-              <h3 class="ymal-name">{{ rec.title | upcase }}</h3>
-              <div class="scent-tags">
-                {% for tag in rec.tags %}
-                  {% assign tag_lower = tag | downcase %}
-                  {% if tag_lower contains 'wood' or tag_lower contains 'leather' or tag_lower contains 'citrus' or tag_lower contains 'musk' %}
-                    <span class="scent-tag">{{ tag }}</span>
-                  {% endif %}
-                {% endfor %}
+          {% if ymal_count < 2 %}
+            <a href="{{ rec.url }}" class="scent-card scent-card--ymal">
+              <div class="scent-card-image">
+                {% if rec.featured_image %}
+                  <img src="{{ rec.featured_image | image_url: width: 800 }}" alt="{{ rec.title }}" loading="lazy">
+                {% endif %}
               </div>
-              <p class="ymal-price">{{ rec.price | money }}</p>
-            </div>
-          </a>
+              <div class="scent-card-overlay"></div>
+              <div class="scent-card-content">
+                <h3 class="scent-name">{{ rec.title | upcase }}</h3>
+                <div class="scent-pill-row">
+                  {%- for tag in rec.tags -%}
+                    {%- assign tl = tag | downcase -%}
+                    {%- if tl == 'wood' or tl == 'leather' or tl == 'citrus' or tl == 'musk' or tl == 'spice' or tl == 'floral' -%}
+                      <span class="scent-pill scent-pill--{{ tl }}">
+                        <span class="scent-pill-dot"></span>
+                        {{ tag | upcase }}
+                      </span>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </div>
+              </div>
+              <div class="quick-view-btn">QUICK VIEW</div>
+            </a>
+            {% assign ymal_count = ymal_count | plus: 1 %}
+          {% endif %}
         {% endunless %}
       {% endfor %}
     </div>
@@ -228,6 +252,27 @@
 {% schema %}
 {
   "name": "Product",
-  "settings": []
+  "settings": [],
+  "blocks": [
+    {
+      "type": "fragrance_note",
+      "name": "Fragrance Note",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "dot_image",
+          "label": "Dot icon image",
+          "info": "Upload a 40×40px image (e.g. wood grain, leather texture, citrus slice). Displays as the note pill dot."
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Note name",
+          "default": "WOOD",
+          "info": "Displayed next to the dot (e.g. WOOD, LEATHER, CITRUS)"
+        }
+      ]
+    }
+  ]
 }
 {% endschema %}

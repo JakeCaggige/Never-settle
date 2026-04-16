@@ -824,81 +824,35 @@ img {
 
 /* PRODUCT PAGE — YOU MAY ALSO LIKE */
 .ymal-section {
-  background: var(--color-black);
-  padding: 80px 64px 120px;
+  background: rgba(255, 255, 255, 0.02);
+  padding: 128px 64px;
   border-top: 1px solid var(--color-white-10);
 }
 
 .ymal-heading {
   font-family: var(--font-heading);
-  font-size: 72px;
-  letter-spacing: 7.2px;
+  font-size: 96px;
+  letter-spacing: 9.6px;
   color: var(--color-white);
   text-align: center;
-  margin-bottom: 64px;
+  margin-bottom: 80px;
 }
 
-.ymal-grid {
+.ymal-scents-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 32px;
-  max-width: 1000px;
+  gap: 0;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
-.ymal-card {
-  display: block;
-  background: var(--color-white-5);
-  border: 1px solid var(--color-white-10);
-  border-radius: 4px;
-  overflow: hidden;
-  transition: border-color 0.3s ease, transform 0.3s ease;
+.scent-card--ymal {
+  aspect-ratio: 1 / 1.68;
 }
 
-.ymal-card:hover {
-  border-color: var(--color-gold);
-  transform: translateY(-4px);
-}
-
-.ymal-image {
-  width: 100%;
-  aspect-ratio: 1;
-  background: #1a1a1a;
-  overflow: hidden;
-}
-
-.ymal-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.ymal-card:hover .ymal-image img {
-  transform: scale(1.04);
-}
-
-.ymal-info {
-  padding: 24px 32px;
-}
-
-.ymal-name {
-  font-family: var(--font-heading);
-  font-size: 28px;
-  letter-spacing: 2.8px;
-  color: var(--color-white);
-  margin-bottom: 8px;
-}
-
-.ymal-info .scent-tags {
-  justify-content: flex-start;
-}
-
-.ymal-price {
-  font-family: var(--font-body);
-  font-size: 20px;
-  color: var(--color-gold);
-  margin-top: 12px;
+.scent-card--ymal .scent-name {
+  font-size: 32px;
+  letter-spacing: 3.2px;
 }
 
 /* COLLECTION HEADER */
@@ -1731,10 +1685,10 @@ img {
   }
 
   .ymal-heading {
-    font-size: 48px;
+    font-size: 56px;
   }
 
-  .ymal-grid {
+  .ymal-scents-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1836,7 +1790,7 @@ img {
 
   .reviews-heading,
   .ymal-heading {
-    font-size: 36px;
+    font-size: 40px;
   }
 
   .product-info h1 {

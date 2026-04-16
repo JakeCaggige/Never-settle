@@ -11,43 +11,20 @@
     },
     "header": {
       "type": "header",
-      "settings": {
-        "menu": "main-menu"
-      }
+      "settings": { "menu": "main-menu" }
     },
     "hero": {
       "type": "hero",
       "settings": {
         "tagline": "#1 PHEROMONE FRAGRANCE BRAND IN AMERICA",
-        "heading": "DOMINATE. WIN. NS.",
+        "heading": "YOUR UNFAIR ADVANTAGE",
         "subheading": "Legendary unique fragrances for men who refuse to be average",
-        "cta_text": "EXPLORE COLLECTION",
+        "cta_text": "BECOME UNSTOPPABLE",
         "cta_link": "/collections/all"
       }
     },
     "trust-badges": {
-      "type": "trust-badges",
-      "blocks": {
-        "badge-1": {
-          "type": "badge",
-          "settings": {
-            "badge_text": "🚚 Free Shipping $75+"
-          }
-        },
-        "badge-2": {
-          "type": "badge",
-          "settings": {
-            "badge_text": "🔄 30-Day Returns"
-          }
-        },
-        "badge-3": {
-          "type": "badge",
-          "settings": {
-            "badge_text": "🇺🇸 Made in USA"
-          }
-        }
-      },
-      "block_order": ["badge-1", "badge-2", "badge-3"]
+      "type": "trust-badges"
     },
     "featured-collection": {
       "type": "featured-collection",
@@ -57,37 +34,30 @@
         "products_to_show": 6
       }
     },
+    "trust-badges-2": {
+      "type": "trust-badges"
+    },
     "androstenone-formula": {
       "type": "androstenone-formula",
       "settings": {}
     },
+    "discovery-set-promo": {
+      "type": "discovery-set-promo",
+      "settings": {
+        "tagline": "TEST ALL THE SCENTS",
+        "heading": "DISCOVERY SET",
+        "subtitle": "Legendary unique fragrances for men who refuse to be average",
+        "cta_text": "SHOP DISCOVERY SET",
+        "cta_link": "/products/discovery-set"
+      }
+    },
     "footer": {
       "type": "footer",
       "blocks": {
-        "footer-1": {
-          "type": "link_list",
-          "settings": {
-            "heading": "SHOP"
-          }
-        },
-        "footer-2": {
-          "type": "link_list",
-          "settings": {
-            "heading": "COMPANY"
-          }
-        },
-        "footer-3": {
-          "type": "link_list",
-          "settings": {
-            "heading": "SUPPORT"
-          }
-        },
-        "footer-4": {
-          "type": "link_list",
-          "settings": {
-            "heading": "CONNECT"
-          }
-        }
+        "footer-1": { "type": "link_list", "settings": { "heading": "COMPANY" } },
+        "footer-2": { "type": "link_list", "settings": { "heading": "SUPPORT" } },
+        "footer-3": { "type": "link_list", "settings": { "heading": "SHOP" } },
+        "footer-4": { "type": "link_list", "settings": { "heading": "CONNECT" } }
       },
       "block_order": ["footer-1", "footer-2", "footer-3", "footer-4"]
     }
@@ -98,7 +68,9 @@
     "hero",
     "trust-badges",
     "featured-collection",
+    "trust-badges-2",
     "androstenone-formula",
+    "discovery-set-promo",
     "footer"
   ]
 }

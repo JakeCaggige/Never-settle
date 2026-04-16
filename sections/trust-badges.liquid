@@ -1,53 +1,33 @@
-<div class="trust-badges">
-  {% for block in section.blocks %}
-    <div class="trust-badge" {{ block.shopify_attributes }}>
-      {{ block.settings.badge_text }}
-    </div>
-  {% endfor %}
+<div class="trust-bar">
+  <div class="trust-bar-track">
+    {% assign badges = "Free Shipping $75+,30-Day Returns,Made in USA,Free Shipping $75+,30-Day Returns,Made in USA,Free Shipping $75+,30-Day Returns,Made in USA" | split: "," %}
+    {% assign icons = "box-seam,arrow-clockwise,flag-fill,box-seam,arrow-clockwise,flag-fill,box-seam,arrow-clockwise,flag-fill" | split: "," %}
+    {% for badge in badges %}
+      <div class="trust-badge">
+        {% assign icon = icons[forloop.index0] %}
+        {% if icon == 'box-seam' %}
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M3 3h18v4H3V3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M3 7v14h18V7" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M9 7v6l3-2 3 2V7" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+          </svg>
+        {% elsif icon == 'arrow-clockwise' %}
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M21 12a9 9 0 11-2.636-6.364L21 3v6h-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        {% elsif icon == 'flag-fill' %}
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M5 3v18M5 3h14l-3 5 3 5H5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+        {% endif %}
+        <span>{{ badge }}</span>
+      </div>
+    {% endfor %}
+  </div>
 </div>
 
 {% schema %}
 {
-  "name": "Trust Badges",
-  "max_blocks": 4,
-  "blocks": [
-    {
-      "type": "badge",
-      "name": "Trust Badge",
-      "settings": [
-        {
-          "type": "text",
-          "id": "badge_text",
-          "label": "Badge text",
-          "default": "🚚 Free Shipping $75+"
-        }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "Trust Badges",
-      "blocks": [
-        {
-          "type": "badge",
-          "settings": {
-            "badge_text": "🚚 Free Shipping $75+"
-          }
-        },
-        {
-          "type": "badge",
-          "settings": {
-            "badge_text": "🔄 30-Day Returns"
-          }
-        },
-        {
-          "type": "badge",
-          "settings": {
-            "badge_text": "🇺🇸 Made in USA"
-          }
-        }
-      ]
-    }
-  ]
+  "name": "Trust Bar"
 }
 {% endschema %}

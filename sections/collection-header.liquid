@@ -1,15 +1,35 @@
 <div class="collection-header">
-  <h1 class="collection-title">{{ collection.title }}</h1>
+  <div class="collection-header-icon" aria-hidden="true">
+    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="20" y1="0" x2="20" y2="40" stroke="#D4AF37" stroke-width="1.5"/>
+      <line x1="0" y1="20" x2="40" y2="20" stroke="#D4AF37" stroke-width="1.5"/>
+      <line x1="20" y1="7" x2="20" y2="13" stroke="#D4AF37" stroke-width="1.5"/>
+      <line x1="20" y1="27" x2="20" y2="33" stroke="#D4AF37" stroke-width="1.5"/>
+      <line x1="7" y1="20" x2="13" y2="20" stroke="#D4AF37" stroke-width="1.5"/>
+      <line x1="27" y1="20" x2="33" y2="20" stroke="#D4AF37" stroke-width="1.5"/>
+    </svg>
+  </div>
+  <h1 class="collection-title">{{ collection.title | upcase }}</h1>
   {% if collection.description != blank %}
     <div class="collection-description">{{ collection.description }}</div>
+  {% else %}
+    <p class="collection-description">Six signature scents. Elite pheromone blends. Absolute dominance.</p>
   {% endif %}
 </div>
 
 <style>
 .collection-header {
   background: var(--color-black);
-  padding: 128px 64px 64px;
+  padding: 80px 64px 48px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.collection-header-icon {
+  margin-bottom: 8px;
 }
 
 .collection-title {
@@ -17,15 +37,19 @@
   font-size: 96px;
   letter-spacing: 9.6px;
   color: var(--color-white);
-  margin-bottom: 24px;
 }
 
 .collection-description {
   font-family: var(--font-body);
+  font-style: italic;
   font-size: 20px;
-  color: var(--color-white-80);
-  max-width: 800px;
+  color: var(--color-white-70);
+  max-width: 600px;
   margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .collection-title { font-size: 56px; }
 }
 </style>
 

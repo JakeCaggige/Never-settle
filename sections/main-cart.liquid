@@ -10,51 +10,59 @@
 
       <div class="cart-body">
 
-        {% comment %} LEFT — Items {% endcomment %}
+        {% comment %} LEFT — Items table {% endcomment %}
         <div class="cart-items-col">
-
-          {% comment %} Header row — display:contents makes its children direct grid children {% endcomment %}
-          <div class="cart-items-header">
-            <div class="col-label col-product">PRODUCT</div>
-            <div class="col-label col-price">PRICE</div>
-            <div class="col-label col-qty">QUANTITY</div>
-            <div class="col-label col-total">TOTAL</div>
-            <div class="col-label col-remove"></div>
-          </div>
-          <div class="cart-header-divider"></div>
-
-          {% for item in cart.items %}
-            <div class="cart-item" data-item-key="{{ item.key }}">
-              <div class="item-info col-product">
-                <div class="item-img">
-                  {% if item.image %}
-                    <img src="{{ item.image | image_url: width: 160 }}" alt="{{ item.product.title }}" loading="lazy">
-                  {% endif %}
-                </div>
-                <div class="item-meta">
-                  <div class="item-name">{{ item.product.title | upcase }}</div>
-                  {% if item.variant.title != 'Default Title' %}
-                    <div class="item-variant">{{ item.variant.title }}</div>
-                  {% endif %}
-                </div>
-              </div>
-
-              <div class="item-price col-price">{{ item.original_price | money }}</div>
-
-              <div class="col-qty">
-                <div class="qty-wrapper">
-                  <button class="qty-btn" data-action="decrease" data-key="{{ item.key }}" aria-label="Decrease quantity">−</button>
-                  <span class="qty-value">{{ item.quantity }}</span>
-                  <button class="qty-btn" data-action="increase" data-key="{{ item.key }}" aria-label="Increase quantity">+</button>
-                </div>
-              </div>
-
-              <div class="item-total col-total">{{ item.final_line_price | money }}</div>
-
-              <button class="remove-btn col-remove" data-key="{{ item.key }}" aria-label="Remove item">×</button>
-            </div>
-            <div class="cart-row-divider"></div>
-          {% endfor %}
+          <table class="cart-table">
+            <colgroup>
+              <col class="col-product">
+              <col class="col-price">
+              <col class="col-qty">
+              <col class="col-total">
+              <col class="col-remove">
+            </colgroup>
+            <thead>
+              <tr>
+                <th class="col-label">PRODUCT</th>
+                <th class="col-label">PRICE</th>
+                <th class="col-label">QUANTITY</th>
+                <th class="col-label">TOTAL</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for item in cart.items %}
+                <tr class="cart-item" data-item-key="{{ item.key }}">
+                  <td class="td-product">
+                    <div class="item-info">
+                      <div class="item-img">
+                        {% if item.image %}
+                          <img src="{{ item.image | image_url: width: 160 }}" alt="{{ item.product.title }}" loading="lazy">
+                        {% endif %}
+                      </div>
+                      <div class="item-meta">
+                        <div class="item-name">{{ item.product.title | upcase }}</div>
+                        {% if item.variant.title != 'Default Title' %}
+                          <div class="item-variant">{{ item.variant.title }}</div>
+                        {% endif %}
+                      </div>
+                    </div>
+                  </td>
+                  <td class="td-center item-price">{{ item.original_price | money }}</td>
+                  <td class="td-center">
+                    <div class="qty-wrapper">
+                      <button class="qty-btn" data-action="decrease" data-key="{{ item.key }}" aria-label="Decrease quantity">−</button>
+                      <span class="qty-value">{{ item.quantity }}</span>
+                      <button class="qty-btn" data-action="increase" data-key="{{ item.key }}" aria-label="Increase quantity">+</button>
+                    </div>
+                  </td>
+                  <td class="td-center item-total">{{ item.final_line_price | money }}</td>
+                  <td class="td-remove">
+                    <button class="remove-btn" data-key="{{ item.key }}" aria-label="Remove item">×</button>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
         </div>
 
         {% comment %} RIGHT — Order Summary {% endcomment %}
@@ -130,55 +138,46 @@
   align-items: start;
 }
 
-/* Single grid container — all header and item cells are direct children */
-.cart-items-col {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr 32px;
-  align-items: center;
+/* Table */
+.cart-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
 }
 
-/* Row wrappers become transparent to layout */
-.cart-items-header,
-.cart-item {
-  display: contents;
-}
+/* Column widths */
+.cart-table col.col-product { width: 40%; }
+.cart-table col.col-price   { width: 18%; }
+.cart-table col.col-qty     { width: 22%; }
+.cart-table col.col-total   { width: 15%; }
+.cart-table col.col-remove  { width: 5%; }
 
-/* Header cell padding */
-.cart-items-header > * {
-  padding-bottom: 16px;
-}
-
-/* Full-width header separator */
-.cart-header-divider {
-  grid-column: 1 / -1;
-  height: 1px;
-  background: rgba(255,255,255,0.1);
-  margin-bottom: 8px;
-}
-
-/* Full-width row separator */
-.cart-row-divider {
-  grid-column: 1 / -1;
-  height: 1px;
-  background: rgba(255,255,255,0.06);
-}
-
-/* Item cell padding */
-.cart-item > * {
-  padding-top: 24px;
-  padding-bottom: 24px;
-}
-
-.col-label {
+/* Header row */
+.cart-table thead th {
   font-family: var(--font-heading);
   font-size: 13px;
   letter-spacing: 2px;
   color: rgba(255,255,255,0.4);
   text-transform: uppercase;
+  font-weight: 400;
+  text-align: center;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
-.col-price, .col-qty, .col-total { text-align: center; }
-.col-remove { text-align: right; }
+.cart-table thead th:first-child { text-align: left; }
+.cart-table thead th:last-child  { text-align: right; }
+
+/* Item rows */
+.cart-item td {
+  padding: 24px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  vertical-align: middle;
+}
+
+.td-product { text-align: left; }
+.td-center  { text-align: center; }
+.td-remove  { text-align: right; }
 
 .item-info {
   display: flex;
@@ -219,7 +218,6 @@
   font-family: var(--font-body);
   font-size: 16px;
   color: var(--color-white);
-  text-align: center;
 }
 
 /* Qty controls */
@@ -266,11 +264,10 @@
   font-size: 22px;
   cursor: pointer;
   transition: color 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
   padding: 0;
   line-height: 1;
+  display: block;
+  margin-left: auto;
 }
 
 .remove-btn:hover { color: var(--color-white); }
@@ -394,22 +391,29 @@
 
 @media (max-width: 768px) {
   .cart-page { padding: 48px 24px; }
-  .cart-items-col { display: block; }
-  .cart-items-header { display: none; }
-  .cart-header-divider { display: none; }
+
+  .cart-table thead { display: none; }
+
+  .cart-table,
+  .cart-table tbody,
+  .cart-item,
+  .cart-item td { display: block; width: 100%; }
+
   .cart-item {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
     padding: 24px 0;
     border-bottom: 1px solid rgba(255,255,255,0.06);
   }
-  .cart-item > * { padding: 0; }
-  .cart-row-divider { display: none; }
-  .item-info { grid-column: 1 / -1; }
-  .item-price, .item-total { text-align: left; }
+
+  .cart-item td {
+    padding: 0;
+    border: none;
+    text-align: left;
+  }
+
+  .cart-item td + td { margin-top: 12px; }
+
   .qty-wrapper { margin: 0; }
-  .remove-btn { justify-content: flex-start; }
+  .remove-btn  { margin-left: 0; }
 }
 </style>
 
@@ -430,11 +434,7 @@
       const row = btn.closest('[data-item-key]');
       const current = parseInt(row.querySelector('.qty-value').textContent, 10);
       const next = btn.dataset.action === 'increase' ? current + 1 : current - 1;
-      if (next < 1) {
-        updateCartItem(key, 0);
-      } else {
-        updateCartItem(key, next);
-      }
+      updateCartItem(key, next < 1 ? 0 : next);
     }
 
     const remove = e.target.closest('.remove-btn');

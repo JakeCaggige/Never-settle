@@ -1,55 +1,45 @@
 <div class="collection-header">
   <div class="collection-header-icon" aria-hidden="true">
-    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <line x1="20" y1="0" x2="20" y2="40" stroke="#D4AF37" stroke-width="1.5"/>
-      <line x1="0" y1="20" x2="40" y2="20" stroke="#D4AF37" stroke-width="1.5"/>
-      <line x1="20" y1="7" x2="20" y2="13" stroke="#D4AF37" stroke-width="1.5"/>
-      <line x1="20" y1="27" x2="20" y2="33" stroke="#D4AF37" stroke-width="1.5"/>
-      <line x1="7" y1="20" x2="13" y2="20" stroke="#D4AF37" stroke-width="1.5"/>
-      <line x1="27" y1="20" x2="33" y2="20" stroke="#D4AF37" stroke-width="1.5"/>
-    </svg>
+    <img src="{{ 'ns-cross.svg' | asset_url }}" alt="" width="56" height="56" loading="lazy">
   </div>
-  <h1 class="collection-title">{{ collection.title | upcase }}</h1>
-  {% if collection.description != blank %}
-    <div class="collection-description">{{ collection.description }}</div>
-  {% else %}
-    <p class="collection-description">Six signature scents. Elite pheromone blends. Absolute dominance.</p>
-  {% endif %}
+  <h1 class="collection-title">SHOP SCENTS</h1>
+  <p class="collection-description">Six signature scents. Elite pheromone blends. Absolute dominance.</p>
 </div>
 
 <style>
 .collection-header {
   background: var(--color-black);
-  padding: 80px 64px 48px;
+  padding: 70px 64px 48px;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 32px;
 }
 
 .collection-header-icon {
-  margin-bottom: 8px;
+  display: flex;
 }
 
 .collection-title {
   font-family: var(--font-heading);
-  font-size: 96px;
-  letter-spacing: 9.6px;
+  font-weight: 400;
+  font-size: 160px;
+  line-height: 144px;
+  letter-spacing: 8px;
   color: var(--color-white);
 }
 
 .collection-description {
   font-family: var(--font-body);
-  font-style: italic;
-  font-size: 20px;
-  color: var(--color-white-70);
-  max-width: 600px;
-  margin: 0 auto;
+  font-weight: 300;
+  font-size: 20.8px;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
 }
 
 @media (max-width: 768px) {
-  .collection-title { font-size: 56px; }
+  .collection-title { font-size: 72px; line-height: 1; }
 }
 </style>
 

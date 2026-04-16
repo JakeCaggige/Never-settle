@@ -1730,7 +1730,41 @@ img {
   }
 }
 
+/* ── TABLET 1024px ─────────────────────────────── */
+@media (max-width: 1024px) {
+  /* Header */
+  .header-wrapper { padding: 20px 40px; }
+
+  /* Hero */
+  .hero { padding: 60px 40px; min-height: 700px; }
+  .hero-heading { font-size: 100px; line-height: 90px; }
+
+  /* Sections */
+  .scents-section { padding: 80px 0 0; }
+  .section-header { padding: 0 40px; margin-bottom: 48px; }
+  .section-title { font-size: 80px; }
+
+  /* Formula */
+  .formula-section { padding: 80px 60px; }
+  .formula-body { font-size: 22px; line-height: 36px; }
+  .formula-tagline { font-size: 32px; letter-spacing: 5px; }
+
+  /* DS Promo */
+  .ds-promo-content { padding: 60px 48px; }
+  .ds-promo-heading { font-size: 80px; }
+  .ds-promo-subtitle { font-size: 22px; line-height: 1.65; }
+
+  /* Footer */
+  .footer-grid { gap: 32px; }
+  .footer-join-save { height: 170px; }
+
+  /* CTA */
+  .cta-primary { padding: 16px 44px; }
+}
+
+/* ── MOBILE 768px ──────────────────────────────── */
 @media (max-width: 768px) {
+  /* Header */
   .header-wrapper {
     padding: 16px 24px;
     flex-wrap: wrap;
@@ -1740,22 +1774,41 @@ img {
     order: 3;
     width: 100%;
     justify-content: center;
-    gap: var(--spacing-m);
+    gap: 24px;
   }
 
+  /* Hero */
   .hero {
-    padding: 40px 24px;
-    min-height: 600px;
+    padding: 48px 24px;
+    min-height: 560px;
   }
 
   .hero-heading {
-    font-size: 80px;
-    line-height: 72px;
+    font-size: 72px;
+    line-height: 66px;
   }
 
-  .section-title {
-    font-size: 56px;
+  .hero-overlay {
+    background: linear-gradient(
+      160deg,
+      rgba(0,0,0,0.75) 0%,
+      rgba(0,0,0,0.3) 70%
+    );
   }
+
+  .cta-primary {
+    padding: 14px 32px;
+    font-size: 15px;
+    letter-spacing: 2px;
+    align-self: stretch;
+    text-align: center;
+  }
+
+  /* Sections */
+  .scents-section { padding: 64px 0 0; }
+  .section-header { padding: 0 24px; margin-bottom: 40px; gap: 16px; }
+  .section-title { font-size: 56px; }
+  .section-subtitle { font-size: 16px; }
 
   .scents-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -1765,14 +1818,26 @@ img {
     font-size: 28px;
   }
 
+  /* Formula */
   .formula-section {
-    padding: 80px 24px;
+    padding: 64px 24px;
   }
 
   .formula-heading {
     font-size: 48px;
   }
 
+  .formula-body {
+    font-size: 20px;
+    line-height: 32px;
+  }
+
+  .formula-tagline {
+    font-size: 26px;
+    letter-spacing: 4px;
+  }
+
+  /* Reviews / YMAL */
   .reviews-section,
   .ymal-section {
     padding: 64px 24px;
@@ -1788,12 +1853,53 @@ img {
   }
 
   .ymal-scents-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 
+  /* Discovery set promo */
+  .ds-promo-card {
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  .ds-promo-content {
+    padding: 48px 24px 40px;
+  }
+
+  .ds-promo-image {
+    width: 100%;
+    height: 380px;
+  }
+
+  .ds-promo-image img {
+    border-radius: 0 0 16px 16px;
+  }
+
+  .ds-promo-heading {
+    font-size: 64px;
+  }
+
+  .ds-promo-subtitle {
+    font-size: 18px;
+    line-height: 1.65;
+  }
+
+  /* Footer */
   .footer-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-m);
+    gap: 32px;
+  }
+
+  .footer-join-save {
+    height: 160px;
+  }
+
+  .footer-join-image-wrap {
+    left: 44%;
+  }
+
+  .footer-join-image-fade {
+    background: linear-gradient(to right, #161614 25%, transparent 60%);
   }
 
   /* Product page */
@@ -1813,29 +1919,6 @@ img {
 
   .core-features {
     grid-template-columns: 1fr;
-  }
-
-  /* Discovery set promo */
-  .ds-promo-card {
-    flex-direction: column;
-    min-height: auto;
-  }
-
-  .ds-promo-content {
-    padding: 64px 24px 40px;
-  }
-
-  .ds-promo-image {
-    width: 100%;
-    height: 400px;
-  }
-
-  .ds-promo-image img {
-    border-radius: 0 0 16px 16px;
-  }
-
-  .ds-promo-heading {
-    font-size: 64px;
   }
 
   /* FAQ page */
@@ -1871,15 +1954,25 @@ img {
   }
 }
 
+/* ── SMALL MOBILE 480px ────────────────────────── */
 @media (max-width: 480px) {
+  /* Header */
+  .header-nav {
+    gap: 16px;
+    font-size: 13px;
+  }
+
+  /* Hero */
   .tagline {
-    font-size: 12px;
+    font-size: 11px;
     letter-spacing: 2px;
   }
 
+  .hero { padding: 40px 20px; }
+
   .hero-heading {
-    font-size: 48px;
-    line-height: 44px;
+    font-size: 52px;
+    line-height: 48px;
   }
 
   .hero-subtitle {
@@ -1887,46 +1980,59 @@ img {
     line-height: 28px;
   }
 
-  .section-title {
-    font-size: 40px;
+  .cta-primary {
+    padding: 14px 24px;
+    font-size: 14px;
   }
 
-  .footer-grid {
-    grid-template-columns: 1fr;
-  }
+  /* Sections */
+  .scents-section { padding: 48px 0 0; }
+  .section-header { gap: 12px; }
+  .section-title { font-size: 40px; }
+  .section-subtitle { font-size: 15px; }
 
-  .formula-heading {
-    font-size: 36px;
-  }
+  .scents-grid { grid-template-columns: repeat(2, 1fr); }
 
+  /* Formula */
+  .formula-heading { font-size: 36px; }
+  .formula-body { font-size: 18px; line-height: 28px; }
+  .formula-tagline { font-size: 20px; letter-spacing: 3px; }
+
+  /* DS Promo */
+  .ds-promo-heading { font-size: 48px; }
+  .ds-promo-subtitle { font-size: 16px; }
+
+  /* Reviews / YMAL */
   .reviews-heading,
-  .ymal-heading {
-    font-size: 40px;
+  .ymal-heading { font-size: 40px; }
+
+  .ymal-scents-grid { grid-template-columns: 1fr; }
+
+  /* Footer */
+  .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+
+  .footer-join-save {
+    height: auto;
+    padding-bottom: 32px;
+    min-height: 180px;
   }
 
-  .product-info h1 {
-    font-size: 40px;
+  .footer-join-image-wrap {
+    left: 50%;
   }
 
-  .ds-promo-heading {
-    font-size: 48px;
-  }
+  /* Product page */
+  .product-info h1 { font-size: 40px; }
 
-  .faq-title {
-    font-size: 40px;
-  }
+  /* FAQ */
+  .faq-title { font-size: 40px; }
+  .faq-question { font-size: 18px; }
 
-  .faq-question {
-    font-size: 18px;
-  }
+  /* Collection */
+  .collection-hero-title { font-size: 64px; }
 
-  .collection-hero-title {
-    font-size: 64px;
-  }
-
-  .page-content--creed h1 {
-    font-size: 48px;
-  }
+  /* Pages */
+  .page-content--creed h1 { font-size: 48px; }
 }
 
 /* ========================================

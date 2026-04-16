@@ -217,42 +217,39 @@
     </div>
   </div>
 
-  {% comment %} You May Also Like {% endcomment %}
-  <div class="ymal-section">
+  {% comment %} You May Also Like — loaded via Shopify recommendations API {% endcomment %}
+  <div class="ymal-section" id="ymal-section" data-product-id="{{ product.id }}">
     <h2 class="ymal-heading">YOU MAY ALSO LIKE</h2>
-    <div class="ymal-scents-grid">
-      {% assign ymal_count = 0 %}
-      {% for rec in collection.products %}
-        {% unless rec.id == product.id %}
-          {% if ymal_count < 2 %}
-            <a href="{{ rec.url }}" class="scent-card scent-card--ymal">
-              <div class="scent-card-image">
-                {% if rec.featured_image %}
-                  <img src="{{ rec.featured_image | image_url: width: 800 }}" alt="{{ rec.title }}" loading="lazy">
-                {% endif %}
-              </div>
-              <div class="scent-card-overlay"></div>
-              <div class="scent-card-content">
-                <h3 class="scent-name">{{ rec.title | upcase }}</h3>
-                <div class="scent-pill-row">
-                  {%- for tag in rec.tags -%}
-                    {%- assign tl = tag | downcase -%}
-                    {%- if tl == 'wood' or tl == 'leather' or tl == 'citrus' or tl == 'musk' or tl == 'spice' or tl == 'floral' -%}
-                      <span class="scent-pill scent-pill--{{ tl }}">
-                        <span class="scent-pill-dot"></span>{{ tag | upcase }}
-                      </span>
-                    {%- endif -%}
-                  {%- endfor -%}
-                </div>
-              </div>
-              <div class="quick-view-btn">QUICK VIEW</div>
-            </a>
-            {% assign ymal_count = ymal_count | plus: 1 %}
-          {% endif %}
-        {% endunless %}
-      {% endfor %}
-    </div>
+    <div class="ymal-scents-grid" id="ymal-grid"></div>
   </div>
+
+  <script>
+    (function() {
+      var productId = document.getElementById('ymal-section').dataset.productId;
+      fetch('/recommendations/products.json?product_id=' + productId + '&limit=2')
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          var grid = document.getElementById('ymal-grid');
+          data.products.forEach(function(p) {
+            var pills = p.tags.filter(function(t) {
+              return ['wood','leather','citrus','musk','spice','floral'].includes(t.toLowerCase());
+            }).map(function(t) {
+              return '<span class="scent-pill scent-pill--' + t.toLowerCase() + '"><span class="scent-pill-dot"></span>' + t.toUpperCase() + '</span>';
+            }).join('');
+            var img = p.featured_image ? '<img src="' + p.featured_image.src + '" alt="' + p.title + '" loading="lazy">' : '';
+            grid.innerHTML += '<a href="/products/' + p.handle + '" class="scent-card scent-card--ymal">'
+              + '<div class="scent-card-image">' + img + '</div>'
+              + '<div class="scent-card-overlay"></div>'
+              + '<div class="scent-card-content">'
+              + '<h3 class="scent-name">' + p.title.toUpperCase() + '</h3>'
+              + '<div class="scent-pill-row">' + pills + '</div>'
+              + '</div>'
+              + '<div class="quick-view-btn">QUICK VIEW</div>'
+              + '</a>';
+          });
+        });
+    })();
+  </script>
 </div>
 
 {% schema %}

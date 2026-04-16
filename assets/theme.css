@@ -1916,6 +1916,11 @@ img {
   }
 
   .footer-join-save {
+    order: -1;
+    grid-column: 1 / -1;
+  }
+
+  .footer-join-save {
     height: 160px;
   }
 

@@ -1538,6 +1538,12 @@ img {
   gap: 40px;
 }
 
+.contact-form-side form {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
 .contact-form-heading {
   font-family: var(--font-heading);
   font-size: 48px;

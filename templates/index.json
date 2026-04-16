@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "announcement-bar": {
@@ -5,17 +14,20 @@
       "settings": {
         "show_announcement": true,
         "announcement_text": "FREE SHIPPING ON ORDERS $75+ | 30-DAY MONEY BACK GUARANTEE",
-        "bg_color": "#D4AF37",
+        "bg_color": "#d4af37",
         "text_color": "#000000"
       }
     },
     "header": {
       "type": "header",
-      "settings": { "menu": "main-menu" }
+      "settings": {
+        "menu": "main-menu"
+      }
     },
     "hero": {
       "type": "hero",
       "settings": {
+        "hero_image": "shopify://shop_images/NS_Hero.png",
         "tagline": "#1 PHEROMONE FRAGRANCE BRAND IN AMERICA",
         "heading": "YOUR UNFAIR ADVANTAGE",
         "subheading": "Legendary unique fragrances for men who refuse to be average",
@@ -24,22 +36,30 @@
       }
     },
     "trust-badges": {
-      "type": "trust-badges"
+      "type": "trust-badges",
+      "settings": {}
     },
     "featured-collection": {
       "type": "featured-collection",
       "settings": {
         "section_title": "THE COLLECTION",
         "section_subtitle": "Six signature scents. Elite pheromone blends. Absolute dominance.",
-        "products_to_show": 6
+        "collection": "",
+        "products_to_show": 6,
+        "show_view_all": true
       }
     },
     "trust-badges-2": {
-      "type": "trust-badges"
+      "type": "trust-badges",
+      "settings": {}
     },
     "androstenone-formula": {
       "type": "androstenone-formula",
-      "settings": {}
+      "settings": {
+        "heading": "OUR ANDROSTENONE FORMULA",
+        "body": "Androstenone is a naturally occurring scent molecule, which is associated with human chemical signaling and attraction. Found as trace amounts in the body, it pheromones or the white cells people unconsciously process in one another. In fragrance design, androstenone is used not as a traditional note but as a molecular primer that interacts with the wearer's skin chemistry, adding depth, warmth, and a potently magnetic presence to a scent. When blended carefully into a cologne, it enhances the fragrance in ways that feel personal and instinctive, creating an effect this is subtly yet memorable.",
+        "tagline": "DOMINATE. WIN. NEVER SETTLE."
+      }
     },
     "discovery-set-promo": {
       "type": "discovery-set-promo",
@@ -54,12 +74,45 @@
     "footer": {
       "type": "footer",
       "blocks": {
-        "footer-1": { "type": "link_list", "settings": { "heading": "COMPANY" } },
-        "footer-2": { "type": "link_list", "settings": { "heading": "SUPPORT" } },
-        "footer-3": { "type": "link_list", "settings": { "heading": "SHOP" } },
-        "footer-4": { "type": "link_list", "settings": { "heading": "CONNECT" } }
+        "footer-1": {
+          "type": "link_list",
+          "settings": {
+            "heading": "COMPANY",
+            "menu": ""
+          }
+        },
+        "footer-2": {
+          "type": "link_list",
+          "settings": {
+            "heading": "SUPPORT",
+            "menu": ""
+          }
+        },
+        "footer-3": {
+          "type": "link_list",
+          "settings": {
+            "heading": "SHOP",
+            "menu": ""
+          }
+        },
+        "footer-4": {
+          "type": "link_list",
+          "settings": {
+            "heading": "CONNECT",
+            "menu": ""
+          }
+        }
       },
-      "block_order": ["footer-1", "footer-2", "footer-3", "footer-4"]
+      "block_order": [
+        "footer-1",
+        "footer-2",
+        "footer-3",
+        "footer-4"
+      ],
+      "settings": {
+        "join_cta": "JOIN THE WINNERS CIRCLE",
+        "join_url": ""
+      }
     }
   },
   "order": [

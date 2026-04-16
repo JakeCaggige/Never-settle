@@ -1,7 +1,7 @@
 <div class="trust-bar">
   <div class="trust-bar-track">
-    {% assign badges = "Free Shipping $75+,30-Day Returns,Made in USA,Free Shipping $75+,30-Day Returns,Made in USA,Free Shipping $75+,30-Day Returns,Made in USA" | split: "," %}
-    {% assign icons = "box-seam,arrow-clockwise,flag-fill,box-seam,arrow-clockwise,flag-fill,box-seam,arrow-clockwise,flag-fill" | split: "," %}
+    {% assign badges = "Free Shipping $75+,30-Day Returns,Made in USA,Free Shipping $75+,30-Day Returns,Made in USA" | split: "," %}
+    {% assign icons = "box-seam,arrow-clockwise,flag-fill,box-seam,arrow-clockwise,flag-fill" | split: "," %}
     {% for badge in badges %}
       <div class="trust-badge">
         {% assign icon = icons[forloop.index0] %}

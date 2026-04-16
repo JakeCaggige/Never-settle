@@ -641,7 +641,7 @@ img {
 
 .footer-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr) auto;
+  grid-template-columns: repeat(4, 1fr) minmax(360px, 1fr);
   gap: 48px;
   align-items: start;
   margin-bottom: 48px;
@@ -708,7 +708,7 @@ img {
   font-size: 13.3px;
   letter-spacing: 1.333px;
   padding: 8px 14px;
-  width: 160px;
+  white-space: nowrap;
   text-align: center;
   cursor: pointer;
   transition: opacity 0.3s ease;

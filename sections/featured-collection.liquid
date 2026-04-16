@@ -1,5 +1,15 @@
 <section class="scents-section">
   <div class="section-header">
+    <div class="section-title-icon" aria-hidden="true">
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="24" y1="0" x2="24" y2="48" stroke="#D4AF37" stroke-width="1.5"/>
+        <line x1="0" y1="24" x2="48" y2="24" stroke="#D4AF37" stroke-width="1.5"/>
+        <line x1="24" y1="8" x2="24" y2="16" stroke="#D4AF37" stroke-width="1.5"/>
+        <line x1="24" y1="32" x2="24" y2="40" stroke="#D4AF37" stroke-width="1.5"/>
+        <line x1="8" y1="24" x2="16" y2="24" stroke="#D4AF37" stroke-width="1.5"/>
+        <line x1="32" y1="24" x2="40" y2="24" stroke="#D4AF37" stroke-width="1.5"/>
+      </svg>
+    </div>
     {% if section.settings.section_title != blank %}
       <h2 class="section-title">{{ section.settings.section_title }}</h2>
     {% endif %}
@@ -10,45 +20,70 @@
 
   <div class="scents-grid">
     {% if section.settings.collection != blank %}
-      {% assign collection = collections[section.settings.collection] %}
+      {% assign featured_col = collections[section.settings.collection] %}
       {% assign products_to_show = section.settings.products_to_show %}
-      
-      {% for product in collection.products limit: products_to_show %}
-        <div class="scent-card">
-          <a href="{{ product.url }}">
-            <div class="scent-image">
-              {% if product.featured_image %}
-                <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title }}" loading="lazy">
-              {% endif %}
+
+      {% for product in featured_col.products limit: products_to_show %}
+        {%- assign badge_label = '' -%}
+        {%- for tag in product.tags -%}
+          {%- assign tag_lower = tag | downcase -%}
+          {%- if tag_lower == 'top seller' -%}{%- assign badge_label = 'Top Seller' -%}{%- endif -%}
+          {%- if tag_lower == 'new scent' or tag_lower == 'new item' -%}{%- assign badge_label = 'New Scent' -%}{%- endif -%}
+        {%- endfor -%}
+
+        <a href="{{ product.url }}" class="scent-card">
+          <div class="scent-card-image">
+            {% if product.featured_image %}
+              <img src="{{ product.featured_image | image_url: width: 800 }}" alt="{{ product.title }}" loading="lazy">
+            {% endif %}
+          </div>
+          <div class="scent-card-overlay"></div>
+
+          {% if badge_label != '' %}
+            <span class="scent-badge-label">{{ badge_label }}</span>
+          {% endif %}
+
+          <div class="scent-card-content">
+            <h3 class="scent-name">{{ product.title | upcase }}</h3>
+            <div class="scent-pill-row">
+              {%- for tag in product.tags -%}
+                {%- assign tl = tag | downcase -%}
+                {%- if tl == 'wood' or tl == 'leather' or tl == 'citrus' or tl == 'musk' or tl == 'spice' or tl == 'floral' -%}
+                  <span class="scent-pill scent-pill--{{ tl }}">
+                    <span class="scent-pill-dot"></span>
+                    {{ tag | upcase }}
+                  </span>
+                {%- endif -%}
+              {%- endfor -%}
             </div>
-            <div class="scent-info">
-              <h3 class="scent-name">{{ product.title }}</h3>
-              <div class="scent-rating">★★★★★</div>
-              <p class="scent-price">{{ product.price | money }}</p>
-            </div>
-          </a>
-        </div>
+          </div>
+
+          <div class="quick-view-btn">QUICK VIEW</div>
+        </a>
       {% endfor %}
+
     {% else %}
-      {% comment %} Placeholder for theme editor {% endcomment %}
+      {% comment %} Placeholder cards for theme editor preview {% endcomment %}
+      {% assign placeholder_names = "BLACK TIGER,KING OF CARNAGE,GHOST HER,∞+1,000,000,000,000+1,THE GOAT,ALPHA BOSS" | split: "," %}
+      {% assign placeholder_badges = "Top Seller,New Scent,New Scent,New Scent,New Scent,New Scent" | split: "," %}
       {% for i in (1..6) %}
         <div class="scent-card">
-          <div class="scent-image" style="background: #222; min-height: 400px;"></div>
-          <div class="scent-info">
-            <h3 class="scent-name">Product {{ i }}</h3>
-            <div class="scent-rating">★★★★★</div>
-            <p class="scent-price">$89.00</p>
+          <div class="scent-card-image" style="background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%); min-height: 400px;"></div>
+          <div class="scent-card-overlay"></div>
+          <span class="scent-badge-label">{{ placeholder_badges[forloop.index0] }}</span>
+          <div class="scent-card-content">
+            <h3 class="scent-name">{{ placeholder_names[forloop.index0] }}</h3>
+            <div class="scent-pill-row">
+              <span class="scent-pill scent-pill--wood"><span class="scent-pill-dot"></span>WOOD</span>
+              <span class="scent-pill scent-pill--leather"><span class="scent-pill-dot"></span>LEATHER</span>
+              <span class="scent-pill scent-pill--citrus"><span class="scent-pill-dot"></span>CITRUS</span>
+            </div>
           </div>
+          <div class="quick-view-btn">QUICK VIEW</div>
         </div>
       {% endfor %}
     {% endif %}
   </div>
-  
-  {% if section.settings.show_view_all and section.settings.collection != blank %}
-    <div style="text-align: center; margin-top: 64px;">
-      <a href="{{ collections[section.settings.collection].url }}" class="cta-primary">VIEW ALL PRODUCTS</a>
-    </div>
-  {% endif %}
 </section>
 
 {% schema %}
@@ -76,16 +111,10 @@
       "type": "range",
       "id": "products_to_show",
       "min": 3,
-      "max": 50,
+      "max": 12,
       "step": 1,
       "label": "Products to show",
       "default": 6
-    },
-    {
-      "type": "checkbox",
-      "id": "show_view_all",
-      "label": "Show 'View All' button",
-      "default": true
     }
   ],
   "presets": [

@@ -257,12 +257,23 @@ img {
 /* COLLECTION SECTION */
 .scents-section {
   background: var(--color-black);
-  padding: 128px 64px;
+  padding: 128px 0 0;
 }
 
 .section-header {
   text-align: center;
-  margin-bottom: 90px;
+  margin-bottom: 64px;
+  padding: 0 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.section-title-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .section-title {
@@ -270,7 +281,6 @@ img {
   font-size: 96px;
   letter-spacing: 9.6px;
   color: var(--color-white);
-  margin-bottom: 24px;
 }
 
 .section-subtitle {
@@ -279,68 +289,157 @@ img {
   color: var(--color-white-80);
 }
 
+/* PRODUCT CARD GRID */
 .scents-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: var(--spacing-m);
-  max-width: 1400px;
-  margin: 0 auto;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
 }
 
 .scent-card {
-  background: var(--color-white-5);
-  border: 1px solid var(--color-white-10);
-  border-radius: 4px;
+  position: relative;
+  display: block;
+  aspect-ratio: 446 / 596;
   overflow: hidden;
-  transition: transform 0.3s ease, border-color 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
 }
 
-.scent-card:hover {
-  transform: translateY(-8px);
-  border-color: var(--color-gold);
-}
-
-.scent-image {
+.scent-card-image {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  aspect-ratio: 1;
-  background: #1a1a1a;
-  overflow: hidden;
+  height: 100%;
 }
 
-.scent-image img {
+.scent-card-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
+  transition: transform 0.5s ease;
 }
 
-.scent-card:hover .scent-image img {
-  transform: scale(1.05);
+.scent-card:hover .scent-card-image img {
+  transform: scale(1.04);
 }
 
-.scent-info {
-  padding: 32px;
-  text-align: center;
+.scent-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 30%, rgba(0,0,0,0.9) 100%);
+  pointer-events: none;
+}
+
+/* Badge — top-left */
+.scent-badge-label {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  background: var(--color-gold);
+  color: var(--color-black);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 17.6px;
+  line-height: 28.16px;
+  padding: 8px 13px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Content — bottom overlay */
+.scent-card-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px 40px 20px 40px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .scent-name {
   font-family: var(--font-heading);
-  font-size: 28.8px;
-  letter-spacing: 2.88px;
-  color: var(--color-gold);
-  margin-bottom: 12px;
-}
-
-.scent-rating {
-  font-size: 20px;
-  color: var(--color-gold);
-  margin-bottom: 16px;
-}
-
-.scent-price {
-  font-family: var(--font-body);
-  font-size: 24px;
+  font-size: 40px;
+  letter-spacing: 4px;
   color: var(--color-white);
+  line-height: 1;
+}
+
+/* Scent pill row */
+.scent-pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.scent-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 0.5px solid #353535;
+  border-radius: 25px;
+  padding: 5px 10px 5px 5px;
+  font-family: var(--font-heading);
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.6);
+  white-space: nowrap;
+}
+
+.scent-pill-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.scent-pill--wood .scent-pill-dot {
+  background: radial-gradient(circle at 40% 35%, #d4a96a, #7a4e2d);
+}
+
+.scent-pill--leather .scent-pill-dot {
+  background: radial-gradient(circle at 40% 35%, #c07840, #5a2e10);
+}
+
+.scent-pill--citrus .scent-pill-dot {
+  background: radial-gradient(circle at 40% 35%, #d4c84a, #5a7a1a);
+}
+
+.scent-pill--musk .scent-pill-dot {
+  background: radial-gradient(circle at 40% 35%, #b09ac8, #4a3060);
+}
+
+.scent-pill--spice .scent-pill-dot {
+  background: radial-gradient(circle at 40% 35%, #d06030, #801800);
+}
+
+.scent-pill--floral .scent-pill-dot {
+  background: radial-gradient(circle at 40% 35%, #e090a8, #903050);
+}
+
+/* Quick View — appears on hover */
+.quick-view-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--color-gold);
+  color: var(--color-black);
+  font-family: var(--font-heading);
+  font-size: 13.3px;
+  letter-spacing: 1.33px;
+  padding: 16px 32px;
+  z-index: 3;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.scent-card:hover .quick-view-btn {
+  opacity: 1;
 }
 
 /* FOOTER */
@@ -1554,9 +1653,13 @@ img {
     font-size: 120px;
     line-height: 108px;
   }
-  
+
   .scents-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .section-title {
+    font-size: 72px;
   }
 }
 
@@ -1598,11 +1701,15 @@ img {
   }
 
   .section-title {
-    font-size: 64px;
+    font-size: 56px;
   }
 
   .scents-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .scent-name {
+    font-size: 28px;
   }
 
   .formula-section {

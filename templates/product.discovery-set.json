@@ -1,22 +1,10 @@
 {
   "sections": {
-    "announcement-bar": {
-      "type": "announcement-bar"
-    },
-    "header": {
-      "type": "header"
-    },
     "main": {
       "type": "discovery-set-product"
-    },
-    "footer": {
-      "type": "footer"
     }
   },
   "order": [
-    "announcement-bar",
-    "header",
-    "main",
-    "footer"
+    "main"
   ]
 }

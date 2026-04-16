@@ -1,30 +1,5 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
-    "announcement-bar": {
-      "type": "announcement-bar",
-      "settings": {
-        "show_announcement": true,
-        "announcement_text": "FREE SHIPPING ON ORDERS $75+ | 30-DAY MONEY BACK GUARANTEE",
-        "bg_color": "#d4af37",
-        "text_color": "#000000"
-      }
-    },
-    "header": {
-      "type": "header",
-      "settings": {
-        "logo": "shopify://shop_images/Nav_Logo.svg",
-        "menu": "main-menu"
-      }
-    },
     "hero": {
       "type": "hero",
       "settings": {
@@ -72,27 +47,14 @@
         "cta_text": "SHOP DISCOVERY SET",
         "cta_link": "/products/discovery-set"
       }
-    },
-    "footer": {
-      "type": "footer",
-      "settings": {
-        "instagram_url": "",
-        "tiktok_url": "",
-        "youtube_url": "",
-        "join_image": "shopify://shop_images/model012_1.png",
-        "join_url": ""
-      }
     }
   },
   "order": [
-    "announcement-bar",
-    "header",
     "hero",
     "trust-badges",
     "featured-collection",
     "trust-badges-2",
     "androstenone-formula",
-    "discovery-set-promo",
-    "footer"
+    "discovery-set-promo"
   ]
 }

@@ -1,0 +1,23 @@
+{
+  "type": "header",
+  "name": "Header",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "settings": {
+        "show_announcement": true,
+        "announcement_text": "FREE SHIPPING ON ORDERS $75+ | 30-DAY MONEY BACK GUARANTEE",
+        "bg_color": "#d4af37",
+        "text_color": "#000000"
+      }
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "logo": "shopify://shop_images/Nav_Logo.svg",
+        "menu": "main-menu"
+      }
+    }
+  },
+  "order": ["announcement-bar", "header"]
+}

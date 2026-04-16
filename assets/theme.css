@@ -1798,6 +1798,7 @@ img {
     padding: 48px 24px;
     min-height: 560px;
     background-position: right center;
+    align-items: flex-end;
   }
 
   .hero-heading {

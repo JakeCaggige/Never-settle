@@ -1918,3 +1918,52 @@ img {
     font-size: 48px;
   }
 }
+
+/* ========================================
+   SCROLL ANIMATIONS
+   ======================================== */
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Hero entrance — triggered by .hero-loaded on <body> */
+.hero-loaded .tagline     { animation: fadeUp 0.7s ease 0.1s both; }
+.hero-loaded .hero-heading  { animation: fadeUp 0.7s ease 0.3s both; }
+.hero-loaded .hero-subtitle { animation: fadeUp 0.7s ease 0.5s both; }
+.hero-loaded .cta-primary   { animation: fadeUp 0.7s ease 0.65s both; }
+
+/* Scroll-triggered base */
+[data-animate] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+[data-animate].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Directional variants */
+[data-animate="left"]  { opacity: 0; transform: translateX(-32px); transition: opacity 0.65s ease, transform 0.65s ease; }
+[data-animate="right"] { opacity: 0; transform: translateX( 32px); transition: opacity 0.65s ease, transform 0.65s ease; }
+[data-animate="left"].is-visible,
+[data-animate="right"].is-visible { opacity: 1; transform: translate(0); }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  [data-animate],
+  [data-animate="left"],
+  [data-animate="right"] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .hero-loaded .tagline,
+  .hero-loaded .hero-heading,
+  .hero-loaded .hero-subtitle,
+  .hero-loaded .cta-primary {
+    animation: none;
+  }
+}

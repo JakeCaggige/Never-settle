@@ -22,11 +22,11 @@
     {% comment %} RIGHT — Product info {% endcomment %}
     <div class="product-info">
 
-      <h1 class="product-title">{{ product.title | upcase }}</h1>
+      <h1 class="product-title" data-animate data-delay="0">{{ product.title | upcase }}</h1>
 
       {% comment %} Fragrance note pills — blocks override tags {% endcomment %}
       {%- assign note_blocks = section.blocks | where: 'type', 'fragrance_note' -%}
-      <div class="scent-pill-row product-scent-pills">
+      <div class="scent-pill-row product-scent-pills" data-animate data-delay="80">
         {% if note_blocks.size > 0 %}
           {% for block in note_blocks %}
             <span class="scent-pill scent-pill--custom" {{ block.shopify_attributes }}>
@@ -51,7 +51,7 @@
       </div>
 
       {% comment %} Price + Rating row {% endcomment %}
-      <div class="product-price-rating">
+      <div class="product-price-rating" data-animate data-delay="160">
         <div class="product-price" id="product-price">{{ product.price | money }}</div>
         <div class="product-rating">
           <span class="stars">★★★★★</span>
@@ -59,10 +59,10 @@
         </div>
       </div>
 
-      <p class="product-description">{{ product.description }}</p>
+      <p class="product-description" data-animate data-delay="240">{{ product.description }}</p>
 
       {% comment %} Size + Add to Cart {% endcomment %}
-      <form action="/cart/add" method="post" enctype="multipart/form-data">
+      <form action="/cart/add" method="post" enctype="multipart/form-data" data-animate data-delay="320">
         {% unless product.has_only_default_variant %}
           <div class="product-options">
             <label class="option-label">SIZE</label>
@@ -86,7 +86,7 @@
       </form>
 
       {% comment %} Shipping / trust row {% endcomment %}
-      <div class="shipping-info">
+      <div class="shipping-info" data-animate data-delay="400">
         <div class="shipping-item">
           <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <rect x="1" y="3" width="15" height="13" stroke="currentColor" stroke-width="1.5" rx="1"/>
@@ -105,7 +105,7 @@
       </div>
 
       {% comment %} Core features — 4 individual bordered cards in 2×2 {% endcomment %}
-      <div class="core-features">
+      <div class="core-features" data-animate data-delay="480">
         <div class="core-feature">
           <svg width="19" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <path d="M12 2C8 2 4 5 4 10c0 4 3 7 6 9l2 1 2-1c3-2 6-5 6-9 0-5-4-8-8-8z" stroke="currentColor" stroke-width="1.5"/>

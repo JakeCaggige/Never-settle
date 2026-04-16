@@ -1,7 +1,10 @@
 <div class="collection-products">
   <div class="scents-grid">
+    {%- assign visible_index = 0 -%}
     {% for product in collection.products %}
       {%- if product.handle == 'discovery-set' -%}{%- continue -%}{%- endif -%}
+      {%- assign card_delay = visible_index | times: 80 -%}
+      {%- assign visible_index = visible_index | plus: 1 -%}
       {%- assign badge_label = '' -%}
       {%- for tag in product.tags -%}
         {%- assign tag_lower = tag | downcase -%}
@@ -9,7 +12,7 @@
         {%- if tag_lower == 'new scent' or tag_lower == 'new item' -%}{%- assign badge_label = 'New Scent' -%}{%- endif -%}
       {%- endfor -%}
 
-      <a href="{{ product.url }}" class="scent-card">
+      <a href="{{ product.url }}" class="scent-card" data-animate data-delay="{{ card_delay }}">
         <div class="scent-card-image">
           {% if product.featured_image %}
             <img src="{{ product.featured_image | image_url: width: 800 }}" alt="{{ product.title }}" loading="lazy">

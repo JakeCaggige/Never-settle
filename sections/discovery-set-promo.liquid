@@ -1,7 +1,7 @@
 <section class="ds-promo">
   <div class="ds-promo-card">
   <div class="ds-promo-inner">
-    <div class="ds-promo-content">
+    <div class="ds-promo-content" data-animate="left" data-delay="0">
       <p class="ds-promo-tagline">{{ section.settings.tagline | default: 'TEST ALL THE SCENTS' }}</p>
       <h2 class="ds-promo-heading">{{ section.settings.heading | default: 'DISCOVERY SET' }}</h2>
       <p class="ds-promo-subtitle">{{ section.settings.subtitle | default: 'Legendary unique fragrances for men who refuse to be average' }}</p>
@@ -10,7 +10,7 @@
       </a>
     </div>
     {% if section.settings.product_image != blank %}
-      <div class="ds-promo-image">
+      <div class="ds-promo-image" data-animate="right" data-delay="150">
         <img src="{{ section.settings.product_image | image_url: width: 700 }}" alt="Discovery Set" loading="lazy">
       </div>
     {% endif %}

@@ -7,13 +7,13 @@
       </div>
     {% endif %}
 
-    <h2 class="formula-heading">{{ section.settings.heading }}</h2>
+    <h2 class="formula-heading" data-animate data-delay="0">{{ section.settings.heading }}</h2>
 
-    <div class="formula-body">
+    <div class="formula-body" data-animate data-delay="150">
       {{ section.settings.body }}
     </div>
 
-    <p class="formula-tagline">{{ section.settings.tagline }}</p>
+    <p class="formula-tagline" data-animate data-delay="300">{{ section.settings.tagline }}</p>
 
     <div class="formula-icon" aria-hidden="true">
       <img src="{{ 'ns-cross.svg' | asset_url }}" alt="" width="40" height="40" loading="lazy">

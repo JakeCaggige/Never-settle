@@ -1,4 +1,25 @@
 // ========================================
+// SCROLL ANIMATIONS
+// ========================================
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Hero entrance
+  document.body.classList.add('hero-loaded');
+
+  // Intersection Observer for scroll-triggered elements
+  const animObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const delay = parseInt(entry.target.dataset.delay || 0, 10);
+      setTimeout(() => entry.target.classList.add('is-visible'), delay);
+      animObserver.unobserve(entry.target);
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('[data-animate]').forEach(el => animObserver.observe(el));
+});
+
+// ========================================
 // CART DRAWER FUNCTIONALITY
 // ========================================
 

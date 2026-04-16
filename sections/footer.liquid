@@ -2,7 +2,7 @@
   <div class="footer-inner">
     <div class="footer-grid">
 
-      <div class="footer-section">
+      <div class="footer-section" data-animate data-delay="0">
         <h4>COMPANY</h4>
         <div class="footer-links">
           <a href="/pages/about" class="footer-link">About Us</a>
@@ -12,7 +12,7 @@
         </div>
       </div>
 
-      <div class="footer-section">
+      <div class="footer-section" data-animate data-delay="80">
         <h4>SUPPORT</h4>
         <div class="footer-links">
           <a href="/pages/faq" class="footer-link">FAQ</a>
@@ -22,7 +22,7 @@
         </div>
       </div>
 
-      <div class="footer-section">
+      <div class="footer-section" data-animate data-delay="160">
         <h4>SHOP</h4>
         <div class="footer-links">
           <a href="/collections/all" class="footer-link">All Fragrances</a>
@@ -30,7 +30,7 @@
         </div>
       </div>
 
-      <div class="footer-section">
+      <div class="footer-section" data-animate data-delay="240">
         <h4>CONNECT</h4>
         <div class="footer-links">
           <a href="{{ section.settings.instagram_url | default: 'https://instagram.com' }}" class="footer-link" target="_blank" rel="noopener">Instagram</a>
@@ -39,7 +39,7 @@
         </div>
       </div>
 
-      <div class="footer-join-save">
+      <div class="footer-join-save" data-animate data-delay="320">
         {% if section.settings.join_image != blank %}
           <div class="footer-join-image-wrap">
             <img

@@ -1,13 +1,13 @@
 <section class="scents-section">
   <div class="section-header">
-    <div class="section-title-icon" aria-hidden="true">
+    <div class="section-title-icon" aria-hidden="true" data-animate data-delay="0">
       <img src="{{ 'ns-cross.svg' | asset_url }}" alt="" width="48" height="48" loading="lazy">
     </div>
     {% if section.settings.section_title != blank %}
-      <h2 class="section-title">{{ section.settings.section_title }}</h2>
+      <h2 class="section-title" data-animate data-delay="100">{{ section.settings.section_title }}</h2>
     {% endif %}
     {% if section.settings.section_subtitle != blank %}
-      <p class="section-subtitle">{{ section.settings.section_subtitle }}</p>
+      <p class="section-subtitle" data-animate data-delay="200">{{ section.settings.section_subtitle }}</p>
     {% endif %}
   </div>
 
@@ -23,8 +23,9 @@
           {%- if tag_lower == 'top seller' -%}{%- assign badge_label = 'Top Seller' -%}{%- endif -%}
           {%- if tag_lower == 'new scent' or tag_lower == 'new item' -%}{%- assign badge_label = 'New Scent' -%}{%- endif -%}
         {%- endfor -%}
+        {%- assign card_delay = forloop.index0 | times: 100 -%}
 
-        <a href="{{ product.url }}" class="scent-card">
+        <a href="{{ product.url }}" class="scent-card" data-animate data-delay="{{ card_delay }}">
           <div class="scent-card-image">
             {% if product.featured_image %}
               <img src="{{ product.featured_image | image_url: width: 800 }}" alt="{{ product.title }}" loading="lazy">

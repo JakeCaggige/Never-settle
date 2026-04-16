@@ -1218,7 +1218,7 @@ img {
 
 .shipping-item svg {
   flex-shrink: 0;
-  color: var(--color-white);
+  color: var(--color-gold);
 }
 
 .shipping-item span {
@@ -1248,7 +1248,7 @@ img {
 
 .core-feature svg {
   flex-shrink: 0;
-  color: var(--color-white);
+  color: var(--color-gold);
 }
 
 .core-feature span {

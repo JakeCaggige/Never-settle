@@ -1874,21 +1874,21 @@ img {
 
   /* Discovery set promo */
   .ds-promo-card {
-    flex-direction: column;
+    flex-direction: column-reverse;
     min-height: auto;
   }
 
   .ds-promo-content {
-    padding: 32px 24px 28px;
+    padding: 24px 20px 28px;
   }
 
   .ds-promo-image {
     width: 100%;
-    height: 380px;
+    height: 320px;
   }
 
   .ds-promo-image img {
-    border-radius: 0 0 16px 16px;
+    border-radius: 16px 16px 0 0;
   }
 
   .ds-promo-heading {
@@ -1898,6 +1898,10 @@ img {
   .ds-promo-subtitle {
     font-size: 18px;
     line-height: 1.65;
+  }
+
+  .ds-promo {
+    padding: 0;
   }
 
   /* Footer */

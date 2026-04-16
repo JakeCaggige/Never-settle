@@ -1,5 +1,13 @@
 <header class="site-header">
   <div class="header-wrapper">
+
+    {% comment %} Hamburger — mobile only {% endcomment %}
+    <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open menu" aria-expanded="false">
+      <span class="hamburger-bar"></span>
+      <span class="hamburger-bar"></span>
+      <span class="hamburger-bar"></span>
+    </button>
+
     <div class="header-logo">
       {% if section.settings.logo != blank %}
         <a href="/">
@@ -20,6 +28,7 @@
       {% endif %}
     </div>
 
+    {% comment %} Desktop nav {% endcomment %}
     <nav class="header-nav">
       {% for link in linklists[section.settings.menu].links %}
         <a href="{{ link.url }}" class="nav-link{% if link.url == request.path %} active{% endif %}">{{ link.title }}</a>
@@ -44,6 +53,238 @@
     </div>
   </div>
 </header>
+
+{% comment %} Mobile nav drawer {% endcomment %}
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" aria-hidden="true">
+  <div class="mobile-nav-header">
+    <div class="mobile-nav-logo">
+      {% if section.settings.logo != blank %}
+        <img src="{{ section.settings.logo | image_url: width: 200 }}" alt="{{ shop.name }}" loading="lazy">
+      {% else %}
+        <span class="logo-text">{{ shop.name }}</span>
+      {% endif %}
+    </div>
+    <button class="mobile-nav-close" id="mobile-nav-close" aria-label="Close menu">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="4" y1="4" x2="20" y2="20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="20" y1="4" x2="4" y2="20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="mobile-nav-links">
+    {% for link in linklists[section.settings.menu].links %}
+      <a href="{{ link.url }}" class="mobile-nav-link{% if link.url == request.path %} active{% endif %}">
+        {{ link.title }}
+      </a>
+    {% endfor %}
+  </div>
+
+  <div class="mobile-nav-footer">
+    <div class="mobile-nav-divider"></div>
+    <div class="mobile-nav-actions">
+      <a href="/account" class="mobile-nav-action">ACCOUNT</a>
+      <a href="/cart" class="mobile-nav-action">CART ({{ cart.item_count }})</a>
+    </div>
+  </div>
+</nav>
+
+<style>
+/* ── HAMBURGER BUTTON — hidden on desktop ── */
+.mobile-menu-btn {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  z-index: 10;
+}
+
+.hamburger-bar {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--color-white);
+  transition: all 0.25s ease;
+}
+
+/* ── MOBILE OVERLAY ── */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+  z-index: 199;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.mobile-nav-overlay.is-open {
+  display: block;
+  opacity: 1;
+}
+
+/* ── MOBILE NAV DRAWER ── */
+.mobile-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 80vw;
+  max-width: 320px;
+  background: #0a0a0a;
+  border-right: 1px solid rgba(212,175,55,0.2);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(-100%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobile-nav.is-open {
+  transform: translateX(0);
+}
+
+/* Nav header row */
+.mobile-nav-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.mobile-nav-logo .logo-text {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  letter-spacing: 3px;
+  color: var(--color-white);
+}
+
+.mobile-nav-close {
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.6);
+  cursor: pointer;
+  padding: 4px;
+  transition: color 0.2s ease;
+  display: flex;
+}
+
+.mobile-nav-close:hover { color: var(--color-white); }
+
+/* Nav links */
+.mobile-nav-links {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 32px 24px;
+  gap: 4px;
+  overflow-y: auto;
+}
+
+.mobile-nav-link {
+  font-family: var(--font-heading);
+  font-size: 40px;
+  letter-spacing: 3px;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.2;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  transition: color 0.2s ease;
+}
+
+.mobile-nav-link:last-child { border-bottom: none; }
+.mobile-nav-link:hover,
+.mobile-nav-link.active { color: var(--color-gold); }
+
+/* Nav footer */
+.mobile-nav-footer {
+  padding: 24px;
+}
+
+.mobile-nav-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.08);
+  margin-bottom: 20px;
+}
+
+.mobile-nav-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mobile-nav-action {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.4);
+  transition: color 0.2s ease;
+}
+
+.mobile-nav-action:hover { color: var(--color-white); }
+
+/* ── MOBILE HEADER LAYOUT OVERRIDES ── */
+@media (max-width: 768px) {
+  .mobile-menu-btn { display: flex; }
+
+  .header-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    padding: 16px 20px;
+  }
+
+  .header-logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .header-nav { display: none; }
+
+  .header-icons { gap: 20px; }
+}
+</style>
+
+<script>
+(function() {
+  var btn     = document.getElementById('mobile-menu-btn');
+  var nav     = document.getElementById('mobile-nav');
+  var overlay = document.getElementById('mobile-nav-overlay');
+  var close   = document.getElementById('mobile-nav-close');
+
+  function openNav() {
+    nav.classList.add('is-open');
+    overlay.classList.add('is-open');
+    nav.setAttribute('aria-hidden', 'false');
+    btn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeNav() {
+    nav.classList.remove('is-open');
+    overlay.classList.remove('is-open');
+    nav.setAttribute('aria-hidden', 'true');
+    btn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  btn.addEventListener('click', openNav);
+  close.addEventListener('click', closeNav);
+  overlay.addEventListener('click', closeNav);
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeNav();
+  });
+})();
+</script>
 
 {% schema %}
 {

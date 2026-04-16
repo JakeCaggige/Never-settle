@@ -1781,32 +1781,7 @@ img {
 
 /* ── MOBILE 768px ──────────────────────────────── */
 @media (max-width: 768px) {
-  /* Header */
-  .header-wrapper {
-    padding: 16px 24px;
-    flex-wrap: wrap;
-  }
-
-  .header-nav {
-    order: 3;
-    width: 100%;
-    justify-content: flex-start;
-    gap: 20px;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 4px;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-
-  .header-nav::-webkit-scrollbar { display: none; }
-
-  .nav-link {
-    white-space: nowrap;
-    flex-shrink: 0;
-    font-size: 13px;
-    letter-spacing: 1.2px;
-  }
+  /* Header — handled in header.liquid section styles */
 
   /* Hero */
   .hero {

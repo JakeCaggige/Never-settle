@@ -1057,12 +1057,9 @@ img {
 }
 
 .product-hero {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 64px 80px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 80px;
+  gap: 0;
   align-items: start;
 }
 
@@ -1123,7 +1120,7 @@ img {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding-top: 80px;
+  padding: 80px 64px 80px 80px;
 }
 
 .product-title {

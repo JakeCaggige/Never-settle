@@ -10,7 +10,7 @@
     {% endif %}
 
     {% if section.settings.subheading != blank %}
-      <p class="hero-subtitle">{{ section.settings.subheading }}</p>
+      <p class="hero-subtitle">{{ section.settings.subheading | newline_to_br }}</p>
     {% endif %}
 
     {% if section.settings.cta_text != blank %}

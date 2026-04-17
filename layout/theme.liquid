@@ -31,9 +31,43 @@
     {% section 'cart-drawer' %}
 
     <script>
-    // Scent card: smooth lerp glow follows mouse on VIEW PRODUCT button
+    // ── Shared marquee init ──────────────────────────────────────────────────
+    // Any element with [data-marquee] gets a seamless infinite scroll.
+    // The first child is treated as "one set"; it is cloned until 2× viewport
+    // wide, then animated by exactly one set's pixel width.
+    function initMarquee(inner) {
+      var set = inner.firstElementChild;
+      if (!set) return;
+
+      // Clone until inner is at least 2× viewport wide
+      while (inner.scrollWidth < window.innerWidth * 2) {
+        var clone = set.cloneNode(true);
+        clone.setAttribute('aria-hidden', 'true');
+        inner.appendChild(clone);
+      }
+      // One extra for safety
+      var extra = set.cloneNode(true);
+      extra.setAttribute('aria-hidden', 'true');
+      inner.appendChild(extra);
+
+      var setWidth = set.offsetWidth;
+      var speed    = inner.dataset.marqueeSpeed || 28; // seconds per loop
+      var style    = document.createElement('style');
+      var name     = 'mq-' + Math.random().toString(36).slice(2, 7);
+      style.textContent =
+        '@keyframes ' + name + ' {' +
+          'from { transform: translateX(0); }' +
+          'to   { transform: translateX(-' + setWidth + 'px); }' +
+        '}';
+      document.head.appendChild(style);
+      inner.style.animation = name + ' ' + speed + 's linear infinite';
+    }
+
+    document.querySelectorAll('[data-marquee]').forEach(initMarquee);
+
+    // ── Scent card: smooth lerp glow on VIEW PRODUCT button ──────────────────
     (function () {
-      var glows = new Map(); // btn -> { x, y, tx, ty, raf }
+      var glows = new Map();
 
       document.addEventListener('mousemove', function (e) {
         var card = e.target.closest('.scent-card');
@@ -48,7 +82,6 @@
         if (!glows.has(btn)) {
           var state = { x: 50, y: 30, tx: tx, ty: ty, raf: null };
           glows.set(btn, state);
-
           (function loop() {
             var s = glows.get(btn);
             if (!s) return;
@@ -60,16 +93,14 @@
           })();
         } else {
           var s = glows.get(btn);
-          s.tx = tx;
-          s.ty = ty;
+          s.tx = tx; s.ty = ty;
         }
       });
 
       document.addEventListener('mouseleave', function (e) {
         var btn = e.target.closest && e.target.closest('.quick-view-btn');
         if (btn && glows.has(btn)) {
-          var s = glows.get(btn);
-          cancelAnimationFrame(s.raf);
+          cancelAnimationFrame(glows.get(btn).raf);
           glows.delete(btn);
         }
       }, true);

@@ -1,5 +1,5 @@
 <div class="trust-bar">
-  <div class="trust-bar-inner" id="trust-bar-inner">
+  <div class="trust-bar-inner" data-marquee>
     <div class="trust-bar-set">
       <div class="trust-badge">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -42,35 +42,6 @@
     </div>
   </div>
 </div>
-
-<script>
-(function () {
-  var inner = document.getElementById('trust-bar-inner');
-  var set   = inner && inner.querySelector('.trust-bar-set');
-  if (!set) return;
-
-  // Clone until content is at least 2× the viewport wide
-  while (inner.scrollWidth < window.innerWidth * 2) {
-    var clone = set.cloneNode(true);
-    clone.setAttribute('aria-hidden', 'true');
-    inner.appendChild(clone);
-  }
-  // One extra clone for safety
-  var extra = set.cloneNode(true);
-  extra.setAttribute('aria-hidden', 'true');
-  inner.appendChild(extra);
-
-  // Animate by exactly one set's pixel width — perfectly seamless
-  var setWidth = set.offsetWidth;
-  var style = document.createElement('style');
-  style.textContent =
-    '@keyframes trust-scroll {' +
-      'from { transform: translateX(0); }' +
-      'to   { transform: translateX(-' + setWidth + 'px); }' +
-    '}';
-  document.head.appendChild(style);
-})();
-</script>
 
 {% schema %}
 {

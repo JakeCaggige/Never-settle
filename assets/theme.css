@@ -1290,6 +1290,14 @@ img {
   margin: 0;
 }
 
+.product-description p,
+.product-description span,
+.product-description li {
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+}
+
 /* Size options */
 .product-options {
   display: flex;

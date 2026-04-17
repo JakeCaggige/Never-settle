@@ -35,8 +35,8 @@
   },
   "order": [
     "collection-header",
-    "main",
     "trust-badges",
+    "main",
     "discovery-set-promo"
   ]
 }

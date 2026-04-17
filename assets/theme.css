@@ -1284,8 +1284,8 @@ img {
 
 .product-description {
   font-family: var(--font-body);
-  font-size: 48px;
-  line-height: 64px;
+  font-size: 32px;
+  line-height: 48px;
   color: rgba(255, 255, 255, 0.8);
   margin: 0;
 }

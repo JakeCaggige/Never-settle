@@ -31,6 +31,16 @@
     {% section 'cart-drawer' %}
 
     <script>
+    // ── Fixed header offset ──────────────────────────────────────────────────
+    (function () {
+      function setHeaderHeight() {
+        var h = document.querySelector('.site-header');
+        if (h) document.documentElement.style.setProperty('--header-height', h.offsetHeight + 'px');
+      }
+      setHeaderHeight();
+      window.addEventListener('resize', setHeaderHeight);
+    })();
+
     // ── Shared marquee init ──────────────────────────────────────────────────
     // Any element with [data-marquee] gets a seamless infinite scroll.
     // The first child is treated as "one set"; it is cloned until 2× viewport

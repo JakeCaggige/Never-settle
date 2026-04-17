@@ -40,6 +40,7 @@ body {
   color: var(--color-white);
   line-height: 1.6;
   overflow-x: hidden;
+  padding-top: var(--header-height, 72px);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -102,8 +103,10 @@ img {
   background: var(--color-black-95);
   backdrop-filter: blur(5px);
   border-bottom: 1px solid var(--color-white-10);
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 100;
 }
 

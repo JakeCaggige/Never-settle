@@ -954,8 +954,8 @@ img {
 
 .review-body {
   font-family: var(--font-body);
-  font-size: 20px;
-  line-height: 1.7;
+  font-size: 32px;
+  line-height: 1.6;
   color: var(--color-white-80);
 }
 

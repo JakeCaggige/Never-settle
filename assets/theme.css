@@ -1042,6 +1042,18 @@ img {
   margin-bottom: 0;
 }
 
+.product-trust-bar {
+  border-top: none;
+  border-bottom: 1px solid var(--color-white-10);
+  margin-bottom: 8px;
+  padding: 14px 0;
+}
+
+.product-trust-bar .trust-badge {
+  font-size: 16px;
+  padding: 0 28px;
+}
+
 .trust-bar-inner {
   display: flex;
   width: max-content;

@@ -981,22 +981,28 @@ img {
   background: var(--color-black);
   border-top: 1px solid var(--color-white-10);
   border-bottom: 1px solid var(--color-white-10);
-  padding: 20px 0;
+  padding: 18px 0;
 }
 
-.trust-bar-track {
+.trust-bar-inner {
   display: flex;
-  white-space: nowrap;
-  animation: trust-scroll 30s linear infinite;
+  width: max-content;
+  animation: trust-scroll 28s linear infinite;
+}
+
+.trust-bar-set {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
 }
 
 .trust-bar .trust-badge {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
-  margin-right: 64px;
+  gap: 10px;
+  padding: 0 40px;
   font-family: var(--font-heading);
-  font-size: 15px;
+  font-size: 14px;
   letter-spacing: 2px;
   color: var(--color-white);
   white-space: nowrap;
@@ -1008,8 +1014,14 @@ img {
   flex-shrink: 0;
 }
 
+.trust-bar-divider {
+  color: rgba(255,255,255,0.2);
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
 @keyframes trust-scroll {
-  0% { transform: translateX(0); }
+  0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
 

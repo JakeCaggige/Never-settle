@@ -954,7 +954,7 @@ img {
 
 .review-body {
   font-family: var(--font-body);
-  font-size: 18px;
+  font-size: 20px;
   line-height: 1.7;
   color: var(--color-white-80);
 }
@@ -1284,8 +1284,8 @@ img {
 
 .product-description {
   font-family: var(--font-body);
-  font-size: 19.2px;
-  line-height: 34.56px;
+  font-size: 16px;
+  line-height: 28px;
   color: rgba(255, 255, 255, 0.8);
   margin: 0;
 }
@@ -2043,8 +2043,8 @@ img {
   }
 
   .product-description {
-    font-size: 17px;
-    line-height: 28px;
+    font-size: 16px;
+    line-height: 26px;
   }
 
   .shipping-info {

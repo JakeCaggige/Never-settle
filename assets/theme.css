@@ -472,7 +472,7 @@ img {
   padding: 16px 36px;
   z-index: 3;
   opacity: 0;
-  transition: opacity 0.25s ease, background 0.05s ease;
+  transition: opacity 0.25s ease;
   pointer-events: none;
   white-space: nowrap;
   box-shadow:

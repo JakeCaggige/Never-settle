@@ -31,18 +31,49 @@
     {% section 'cart-drawer' %}
 
     <script>
-    // Scent card: glow follows mouse on the VIEW PRODUCT button
-    document.addEventListener('mousemove', function (e) {
-      var card = e.target.closest('.scent-card');
-      if (!card) return;
-      var btn = card.querySelector('.quick-view-btn');
-      if (!btn) return;
-      var rect = btn.getBoundingClientRect();
-      var x = ((e.clientX - rect.left) / rect.width  * 100).toFixed(1);
-      var y = ((e.clientY - rect.top)  / rect.height * 100).toFixed(1);
-      btn.style.setProperty('--glow-x', x + '%');
-      btn.style.setProperty('--glow-y', y + '%');
-    });
+    // Scent card: smooth lerp glow follows mouse on VIEW PRODUCT button
+    (function () {
+      var glows = new Map(); // btn -> { x, y, tx, ty, raf }
+
+      document.addEventListener('mousemove', function (e) {
+        var card = e.target.closest('.scent-card');
+        if (!card) return;
+        var btn = card.querySelector('.quick-view-btn');
+        if (!btn) return;
+
+        var rect = btn.getBoundingClientRect();
+        var tx = (e.clientX - rect.left) / rect.width  * 100;
+        var ty = (e.clientY - rect.top)  / rect.height * 100;
+
+        if (!glows.has(btn)) {
+          var state = { x: 50, y: 30, tx: tx, ty: ty, raf: null };
+          glows.set(btn, state);
+
+          (function loop() {
+            var s = glows.get(btn);
+            if (!s) return;
+            s.x += (s.tx - s.x) * 0.1;
+            s.y += (s.ty - s.y) * 0.1;
+            btn.style.setProperty('--glow-x', s.x.toFixed(2) + '%');
+            btn.style.setProperty('--glow-y', s.y.toFixed(2) + '%');
+            s.raf = requestAnimationFrame(loop);
+          })();
+        } else {
+          var s = glows.get(btn);
+          s.tx = tx;
+          s.ty = ty;
+        }
+      });
+
+      document.addEventListener('mouseleave', function (e) {
+        var btn = e.target.closest && e.target.closest('.quick-view-btn');
+        if (btn && glows.has(btn)) {
+          var s = glows.get(btn);
+          cancelAnimationFrame(s.raf);
+          glows.delete(btn);
+        }
+      }, true);
+    })();
     </script>
   </body>
 </html>

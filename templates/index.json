@@ -56,8 +56,8 @@
   },
   "order": [
     "hero",
-    "featured-collection",
     "trust-badges",
+    "featured-collection",
     "androstenone-formula",
     "discovery-set-promo"
   ]

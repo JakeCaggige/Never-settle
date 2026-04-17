@@ -987,6 +987,7 @@ img {
 .trust-bar-inner {
   display: flex;
   width: max-content;
+  will-change: transform;
   animation: trust-scroll 28s linear infinite;
 }
 
@@ -994,6 +995,7 @@ img {
   display: flex;
   align-items: center;
   flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .trust-bar .trust-badge {
@@ -1021,8 +1023,8 @@ img {
 }
 
 @keyframes trust-scroll {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 
 /* DISCOVERY SET PROMO SECTION */

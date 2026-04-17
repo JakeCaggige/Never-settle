@@ -19,7 +19,7 @@
     <script src="{{ 'custom.js' | asset_url }}" defer="defer"></script>
   </head>
 
-  <body>
+  <body class="template-{{ template | split: '.' | first | handleize }}">
     {% sections 'header-group' %}
     
     <main id="MainContent" role="main">

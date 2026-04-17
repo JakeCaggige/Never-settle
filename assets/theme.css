@@ -1237,6 +1237,8 @@ img {
   flex-direction: column;
   gap: 16px;
   padding: 80px 64px 80px 80px;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .product-title {

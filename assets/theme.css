@@ -1182,6 +1182,7 @@ img {
   flex-direction: column;
   gap: 12px;
   overflow: hidden;
+  border-right: 1px solid rgba(200, 200, 200, 0.15);
 }
 
 .product-main-image {
@@ -1232,6 +1233,7 @@ img {
   padding: 80px 64px 80px 80px;
   min-width: 0;
   overflow: hidden;
+  background: radial-gradient(ellipse at 60% 20%, rgba(212, 175, 55, 0.07) 0%, transparent 65%);
 }
 
 .product-title {

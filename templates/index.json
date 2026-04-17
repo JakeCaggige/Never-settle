@@ -20,10 +20,6 @@
         "cta_link": "/collections/all"
       }
     },
-    "trust-badges": {
-      "type": "trust-badges",
-      "settings": {}
-    },
     "featured-collection": {
       "type": "featured-collection",
       "settings": {
@@ -56,7 +52,6 @@
   },
   "order": [
     "hero",
-    "trust-badges",
     "featured-collection",
     "androstenone-formula",
     "discovery-set-promo"

@@ -65,22 +65,17 @@
 
     document.querySelectorAll('[data-marquee]').forEach(initMarquee);
 
-    // ── Scent card: smooth lerp glow on VIEW PRODUCT button ──────────────────
+    // ── Lerp glow on VIEW PRODUCT + hero CTA buttons ─────────────────────────
     (function () {
       var glows = new Map();
 
-      document.addEventListener('mousemove', function (e) {
-        var card = e.target.closest('.scent-card');
-        if (!card) return;
-        var btn = card.querySelector('.quick-view-btn');
-        if (!btn) return;
-
+      function trackBtn(btn, clientX, clientY) {
         var rect = btn.getBoundingClientRect();
-        var tx = (e.clientX - rect.left) / rect.width  * 100;
-        var ty = (e.clientY - rect.top)  / rect.height * 100;
+        var tx = (clientX - rect.left) / rect.width  * 100;
+        var ty = (clientY - rect.top)  / rect.height * 100;
 
         if (!glows.has(btn)) {
-          var state = { x: 50, y: 30, tx: tx, ty: ty, raf: null };
+          var state = { x: 50, y: 30, tx: tx, ty: ty };
           glows.set(btn, state);
           (function loop() {
             var s = glows.get(btn);
@@ -95,13 +90,25 @@
           var s = glows.get(btn);
           s.tx = tx; s.ty = ty;
         }
+      }
+
+      document.addEventListener('mousemove', function (e) {
+        // Scent card VIEW PRODUCT
+        var card = e.target.closest('.scent-card');
+        if (card) {
+          var btn = card.querySelector('.quick-view-btn');
+          if (btn) trackBtn(btn, e.clientX, e.clientY);
+        }
+        // Hero CTA
+        var cta = e.target.closest('.cta-primary');
+        if (cta) trackBtn(cta, e.clientX, e.clientY);
       });
 
       document.addEventListener('mouseleave', function (e) {
-        var btn = e.target.closest && e.target.closest('.quick-view-btn');
-        if (btn && glows.has(btn)) {
-          cancelAnimationFrame(glows.get(btn).raf);
-          glows.delete(btn);
+        var el = e.target.closest && (e.target.closest('.quick-view-btn') || e.target.closest('.cta-primary'));
+        if (el && glows.has(el)) {
+          cancelAnimationFrame(glows.get(el).raf);
+          glows.delete(el);
         }
       }, true);
     })();

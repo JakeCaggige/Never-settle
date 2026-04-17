@@ -911,8 +911,8 @@ img {
 }
 
 .reviews-list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
   max-width: 1400px;
   margin: 0 auto;
@@ -2049,6 +2049,8 @@ img {
     font-size: 48px;
     letter-spacing: 3px;
   }
+
+  .reviews-list { grid-template-columns: 1fr; }
 
   .product-description {
     font-size: 28px;

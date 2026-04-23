@@ -9,12 +9,24 @@
  */
 {
   "sections": {
+    "deal-banner": {
+      "type": "deal-banner",
+      "settings": {
+        "show_banner": true,
+        "label": "LIMITED TIME",
+        "deal_text": "Buy 2 Fragrances, Get Free Shipping",
+        "deal_code": "",
+        "cta_text": "SHOP NOW",
+        "cta_link": "/collections/all"
+      }
+    },
     "main": {
       "type": "main-product",
       "settings": {}
     }
   },
   "order": [
+    "deal-banner",
     "main"
   ]
 }

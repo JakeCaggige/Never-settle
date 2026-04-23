@@ -1,0 +1,140 @@
+{% if section.settings.show_banner %}
+<div class="deal-banner">
+  <div class="deal-banner-inner">
+    {% if section.settings.label != blank %}
+      <span class="deal-banner-label">{{ section.settings.label }}</span>
+    {% endif %}
+    {% if section.settings.deal_text != blank %}
+      <span class="deal-banner-text">{{ section.settings.deal_text }}</span>
+    {% endif %}
+    {% if section.settings.deal_code != blank %}
+      <span class="deal-banner-code">{{ section.settings.deal_code }}</span>
+    {% endif %}
+    {% if section.settings.cta_text != blank %}
+      <a href="{{ section.settings.cta_link | default: '/collections/all' }}" class="deal-banner-cta">{{ section.settings.cta_text }}</a>
+    {% endif %}
+  </div>
+</div>
+{% endif %}
+
+<style>
+.deal-banner {
+  background: var(--color-black);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+  padding: 13px 40px;
+}
+
+.deal-banner-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.deal-banner-label {
+  font-family: var(--font-heading);
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: var(--color-gold);
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  padding: 3px 12px;
+  white-space: nowrap;
+}
+
+.deal-banner-text {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  letter-spacing: 2px;
+  color: var(--color-white);
+  white-space: nowrap;
+}
+
+.deal-banner-code {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  letter-spacing: 4px;
+  color: var(--color-gold);
+  border: 1px dashed rgba(212, 175, 55, 0.55);
+  padding: 3px 12px;
+  white-space: nowrap;
+}
+
+.deal-banner-cta {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: var(--color-black);
+  background: var(--color-gold);
+  padding: 7px 18px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+}
+
+.deal-banner-cta:hover {
+  opacity: 0.85;
+}
+
+@media (max-width: 768px) {
+  .deal-banner {
+    padding: 10px 20px;
+  }
+  .deal-banner-text {
+    font-size: 14px;
+    text-align: center;
+  }
+  .deal-banner-inner {
+    gap: 12px;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Deal Banner",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_banner",
+      "label": "Show deal banner",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label badge (e.g. LIMITED TIME)",
+      "default": "LIMITED TIME"
+    },
+    {
+      "type": "text",
+      "id": "deal_text",
+      "label": "Deal text",
+      "default": "Buy 2 Fragrances, Get Free Shipping"
+    },
+    {
+      "type": "text",
+      "id": "deal_code",
+      "label": "Promo code (optional — leave blank to hide)",
+      "default": ""
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Button text",
+      "default": "SHOP NOW"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Deal Banner"
+    }
+  ]
+}
+{% endschema %}

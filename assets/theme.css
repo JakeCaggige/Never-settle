@@ -1047,6 +1047,11 @@ img {
   margin-left: 50%;
 }
 
+/* Hide announcement bar on collection/shop page */
+.template-collection .announcement-bar {
+  display: none !important;
+}
+
 .trust-bar-inner {
   display: flex;
   width: max-content;

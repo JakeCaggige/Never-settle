@@ -9,6 +9,17 @@
  */
 {
   "sections": {
+    "deal-banner": {
+      "type": "deal-banner",
+      "settings": {
+        "show_banner": true,
+        "label": "LIMITED TIME",
+        "deal_text": "Buy 2 Fragrances, Get Free Shipping",
+        "deal_code": "",
+        "cta_text": "SHOP NOW",
+        "cta_link": "/collections/all"
+      }
+    },
     "hero": {
       "type": "hero",
       "settings": {
@@ -51,6 +62,7 @@
     }
   },
   "order": [
+    "deal-banner",
     "hero",
     "featured-collection",
     "androstenone-formula",

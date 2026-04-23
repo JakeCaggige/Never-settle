@@ -181,18 +181,20 @@ addToCartForms.forEach(form => {
     const formData = new FormData(form);
     const submitButton = form.querySelector('button[type="submit"]');
     
+    const originalText = submitButton ? submitButton.textContent : 'ADD TO CART';
+
     // Disable button during submission
     if (submitButton) {
       submitButton.disabled = true;
       submitButton.textContent = 'ADDING...';
     }
-    
+
     try {
       const response = await fetch('/cart/add.js', {
         method: 'POST',
         body: formData
       });
-      
+
       if (response.ok) {
         // Open cart drawer
         toggleCartDrawer();
@@ -203,10 +205,10 @@ addToCartForms.forEach(form => {
       console.error('Error adding to cart:', error);
       alert('Error adding to cart. Please try again.');
     } finally {
-      // Re-enable button
+      // Re-enable button, restoring original text (includes price)
       if (submitButton) {
         submitButton.disabled = false;
-        submitButton.textContent = 'ADD TO CART';
+        submitButton.textContent = originalText;
       }
     }
   });
@@ -249,9 +251,9 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', () => {
   const variantButtons = document.querySelectorAll('.size-option');
   const variantInput = document.querySelector('input[name="id"]');
-  const priceEl = document.getElementById('product-price');
+  const addToCartBtn = document.querySelector('.btn-add-to-cart');
 
-  function formatMoney(cents) {
+  function formatMoneyNoTrailing(cents) {
     return '$' + (cents / 100).toFixed(2).replace(/\.00$/, '');
   }
 
@@ -265,7 +267,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (variantId) variantInput.value = variantId;
 
         const price = button.getAttribute('data-price');
-        if (price && priceEl) priceEl.textContent = formatMoney(parseInt(price, 10));
+        if (price && addToCartBtn && !addToCartBtn.disabled) {
+          addToCartBtn.textContent = 'ADD TO CART — ' + formatMoneyNoTrailing(parseInt(price, 10));
+        }
       });
     });
   }

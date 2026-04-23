@@ -24,10 +24,21 @@
 
       <h1 class="product-title" data-animate data-delay="0">{{ product.title | upcase }}</h1>
 
-      {% comment %} Fragrance note pills — blocks override tags {% endcomment %}
+      {% comment %} Fragrance note pills — metafield (primary) → blocks → tags {% endcomment %}
       {%- assign note_blocks = section.blocks | where: 'type', 'fragrance_note' -%}
+      {%- assign scent_notes_raw = product.metafields.custom.scent_notes | default: '' -%}
+      {%- assign scent_notes = scent_notes_raw | split: ',' -%}
       <div class="scent-pill-row product-scent-pills" data-animate data-delay="80">
-        {% if note_blocks.size > 0 %}
+        {% if scent_notes_raw != blank %}
+          {% comment %} Metafield: comma-separated list e.g. "Wood, Leather, Citrus" {% endcomment %}
+          {%- for note in scent_notes -%}
+            {%- assign note_clean = note | strip | downcase -%}
+            <span class="scent-pill scent-pill--{{ note_clean }}">
+              <span class="scent-pill-dot"></span>{{ note | strip | upcase }}
+            </span>
+          {%- endfor -%}
+        {% elsif note_blocks.size > 0 %}
+          {% comment %} Theme customizer blocks {% endcomment %}
           {% for block in note_blocks %}
             <span class="scent-pill scent-pill--custom" {{ block.shopify_attributes }}>
               <span class="scent-pill-dot"
@@ -39,6 +50,7 @@
             </span>
           {% endfor %}
         {% else %}
+          {% comment %} Fallback: product tags {% endcomment %}
           {%- for tag in product.tags -%}
             {%- assign tl = tag | downcase -%}
             {%- if tl == 'wood' or tl == 'leather' or tl == 'citrus' or tl == 'musk' or tl == 'spice' or tl == 'floral' -%}

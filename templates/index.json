@@ -9,24 +9,13 @@
  */
 {
   "sections": {
-    "deal-banner": {
-      "type": "deal-banner",
-      "settings": {
-        "show_banner": true,
-        "label": "LIMITED TIME",
-        "deal_text": "Buy 2 Fragrances, Get Free Shipping",
-        "deal_code": "",
-        "cta_text": "SHOP NOW",
-        "cta_link": "/collections/all"
-      }
-    },
     "hero": {
       "type": "hero",
       "settings": {
         "hero_image": "shopify://shop_images/NS_Hero.png",
         "tagline": "#1 PHEROMONE FRAGRANCE BRAND IN AMERICA",
         "heading": "YOUR UNFAIR ADVANTAGE",
-        "subheading": "Legendary unique fragrances for\nmen who refuse to be average",
+        "subheading": "Legendary fragrances for\nmen who refuse to be average",
         "cta_text": "BECOME UNSTOPPABLE",
         "cta_link": "/collections/all"
       }
@@ -62,7 +51,6 @@
     }
   },
   "order": [
-    "deal-banner",
     "hero",
     "featured-collection",
     "androstenone-formula",

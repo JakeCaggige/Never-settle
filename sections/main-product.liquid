@@ -24,13 +24,28 @@
 
       <h1 class="product-title" data-animate data-delay="0">{{ product.title | upcase }}</h1>
 
-      {% comment %} Fragrance note pills — metafield (primary) → blocks → tags {% endcomment %}
+      {% comment %} Fragrance note pills — metaobjects (with image) → text metafield → blocks → tags {% endcomment %}
       {%- assign note_blocks = section.blocks | where: 'type', 'fragrance_note' -%}
-      {%- assign scent_notes_raw = product.metafields.custom.scent_notes | default: '' -%}
-      {%- assign scent_notes = scent_notes_raw | split: ',' -%}
+      {%- assign scent_meta = product.metafields.custom.scent_notes -%}
+      {%- assign scent_meta_type = scent_meta.type | default: '' -%}
+      {%- assign scent_notes_raw = scent_meta | default: '' -%}
       <div class="scent-pill-row product-scent-pills" data-animate data-delay="80">
-        {% if scent_notes_raw != blank %}
-          {% comment %} Metafield: comma-separated list e.g. "Wood, Leather, Citrus" {% endcomment %}
+        {% if scent_meta_type contains 'metaobject' %}
+          {% comment %} Metaobject list — each scent note has name + image {% endcomment %}
+          {%- for note in scent_meta.value -%}
+            {%- assign note_key = note.name | default: '' | downcase | strip -%}
+            <span class="scent-pill scent-pill--{{ note_key }}">
+              <span class="scent-pill-dot"
+                {% if note.image != blank %}
+                  style="background-image: url('{{ note.image | image_url: width: 40 }}'); background-size: cover; background-position: center;"
+                {% endif %}
+              ></span>
+              {{ note.name | upcase }}
+            </span>
+          {%- endfor -%}
+        {% elsif scent_notes_raw != '' %}
+          {% comment %} Plain text metafield — comma-separated, CSS-class color only {% endcomment %}
+          {%- assign scent_notes = scent_notes_raw | split: ',' -%}
           {%- for note in scent_notes -%}
             {%- assign note_clean = note | strip | downcase -%}
             <span class="scent-pill scent-pill--{{ note_clean }}">
